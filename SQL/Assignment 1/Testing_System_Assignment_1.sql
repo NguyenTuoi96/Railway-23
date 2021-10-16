@@ -1,3 +1,4 @@
+-- testing_system
 CREATE DATABASE testing_system;
 USE testing_system;
 -- table1
@@ -75,14 +76,18 @@ CREATE TABLE exam_question (
     question_id 		INT
 );
 
-
-
-
-
-
-
-
-
-
-
-
+-- fresher_training_management
+CREATE DATABASE fresher_training_management;
+USE fresher_training_management;
+CREATE TABLE trainee (
+	trainee_id 			INT,
+    full_name 			VARCHAR(50),
+    birth_date 			DATE,
+    gender 				ENUM('male', 'female', 'unknown'),
+    et_iq 				INT CHECK(0 <= ET_IQ AND ET_IQ <= 20),
+    et_gmath 			INT CHECK(0 <= ET_Gmath AND ET_Gmath <= 20),
+    et_english 			INT CHECK(0 <= ET_English AND ET_English <= 50),
+    training_class 		VARCHAR(20),
+    evaluation_notes 	VARCHAR(500)
+);
+ALTER TABLE trainee ADD vti_account VARCHAR(50) NOT NULL;
