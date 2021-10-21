@@ -18,13 +18,9 @@ VALUES
 
 -- Question 2: Viết lệnh để lấy ra tất cả các thực tập sinh đã vượt qua bài test đầu vào, nhóm chúng thành các tháng sinh khác nhau 
 -- SELECT trainee_id, birth_date, DATE_FORMAT(birth_date, '%m') FROM trainee; 
-SELECT DATE_FORMAT(birth_date, '%m') 
+SELECT GROUP_CONCAT(full_name) AS group_trainee
 FROM trainee 
-WHERE (et_iq + et_gmath) >= 20
-  AND et_iq >= 8
-  AND et_gmath >= 8
-  AND et_english >= 18  
-GROUP BY DATE_FORMAT(birth_date, '%m');
+GROUP BY month(birth_date);
 
 -- Question 3: Viết lệnh để lấy ra thực tập sinh có tên dài nhất, lấy ra các thông tin sau: tên, tuổi, các thông tin cơ bản (như đã được định nghĩa trong table)
 SELECT full_name, birth_date, gender, training_class, vti_account 
