@@ -17,10 +17,9 @@ VALUES
     ('Nguyễn Duy Đông'		, '1996-12-25', 'male'		, 16	, 19	, 48, 'A1', 'đánh giá 12', 'duydongVTIacc');
 
 -- Question 2: Viết lệnh để lấy ra tất cả các thực tập sinh đã vượt qua bài test đầu vào, nhóm chúng thành các tháng sinh khác nhau 
--- SELECT trainee_id, birth_date, DATE_FORMAT(birth_date, '%m') FROM trainee; 
-SELECT GROUP_CONCAT(full_name) AS group_trainee
+SELECT YEAR(birth_date) AS 'năm sinh', GROUP_CONCAT(full_name) AS group_trainee
 FROM trainee 
-GROUP BY month(birth_date);
+GROUP BY YEAR(birth_date);
 
 -- Question 3: Viết lệnh để lấy ra thực tập sinh có tên dài nhất, lấy ra các thông tin sau: tên, tuổi, các thông tin cơ bản (như đã được định nghĩa trong table)
 SELECT full_name, birth_date, gender, training_class, vti_account 
@@ -29,7 +28,7 @@ WHERE LENGTH(full_name) =
 	(SELECT MAX(LENGTH(full_name))
      FROM trainee);
 
--- Question 4: Viết lệnh để lấy ra tất cả các thực tập sinh là ET, 1 ET thực tập sinh là những người đã vượt qua bài test đầu vào với các tiêu chí sau đây:
+-- Question 4: Viết lệnh để lấy ra tất cả các thực tập sinh là ET, 1 ET thực tập sinh là những người đã vượt qua bài test đầu vào và có các tiêu chí sau đây:
 --  ET_IQ + ET_Gmath>=20
 --  ET_IQ>=8
 --  ET_Gmath>=8

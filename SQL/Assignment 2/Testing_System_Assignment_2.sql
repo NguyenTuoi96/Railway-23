@@ -61,8 +61,8 @@ CREATE TABLE `account`(
     department_id 	TINYINT NOT NULL,
     position_id 	TINYINT NOT NULL,
     create_date 	DATE,
-FOREIGN KEY (department_id) REFERENCES department(department_id),
-FOREIGN KEY (position_id) REFERENCES `position`(position_id)
+FOREIGN KEY (department_id) REFERENCES department(department_id) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (position_id) REFERENCES `position`(position_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Thêm data vào bảng
 INSERT INTO `account`(account_id, email, username, fullname, department_id, position_id, create_date) 
@@ -89,7 +89,7 @@ CREATE TABLE `group`(
     group_name 		VARCHAR(50) CHAR SET utf8mb4 NOT NULL UNIQUE,
     creator_id 		INT NOT NULL,
     create_date 	DATE,
-FOREIGN KEY (creator_id) REFERENCES `account`(account_id)
+FOREIGN KEY (creator_id) REFERENCES `account`(account_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Thêm data vào bảng
 INSERT INTO `group`(group_id, group_name, creator_id, create_date) 
@@ -110,8 +110,8 @@ CREATE TABLE group_account(
     account_id 		INT NOT NULL,
     join_date 		DATE,
     PRIMARY KEY (group_id, account_id),
-    FOREIGN KEY (group_id) REFERENCES `group`(group_id),
-    FOREIGN KEY (account_id) REFERENCES `account`(account_id)
+    FOREIGN KEY (group_id) REFERENCES `group`(group_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (account_id) REFERENCES `account`(account_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Thêm data vào bảng
 INSERT INTO group_account(group_id, account_id, join_date) 
@@ -177,9 +177,9 @@ CREATE TABLE question(
     type_id 		TINYINT NOT NULL,
     creator_id 		INT NOT NULL,
     create_date 	DATE,
-    FOREIGN KEY (category_id) REFERENCES category_question(category_id),
-    FOREIGN KEY (type_id) REFERENCES type_question(type_id),
-    FOREIGN KEY (creator_id) REFERENCES `account`(account_id)
+    FOREIGN KEY (category_id) REFERENCES category_question(category_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (type_id) REFERENCES type_question(type_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (creator_id) REFERENCES `account`(account_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Thêm data vào bảng
 INSERT INTO question(question_id, content, category_id, type_id, creator_id, create_date) 
@@ -203,7 +203,7 @@ CREATE TABLE answer(
     content 		VARCHAR(5000) CHAR SET utf8mb4,
     question_id 	TINYINT NOT NULL,
     is_correct 		BOOLEAN,
-    FOREIGN KEY (question_id) REFERENCES question(question_id)
+    FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Thêm data vào bảng
 INSERT INTO answer(answer_id, content, question_id, is_correct) 
@@ -233,8 +233,8 @@ CREATE TABLE exam(
     duration 		TINYINT NOT NULL,
     creator_id 		INT NOT NULL,
     create_date 	DATE,
-    FOREIGN KEY (category_id) REFERENCES category_question(category_id),
-    FOREIGN KEY (creator_id) REFERENCES `account`(account_id)
+    FOREIGN KEY (category_id) REFERENCES category_question(category_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (creator_id) REFERENCES `account`(account_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Thêm data vào bảng
 INSERT INTO exam(exam_id, `code`, title, category_id, duration, creator_id, create_date) 
@@ -253,8 +253,9 @@ DROP TABLE IF EXISTS exam_question;
 CREATE TABLE exam_question(
 	exam_id 		TINYINT NOT NULL,
     question_id 	TINYINT NOT NULL,
-    FOREIGN KEY (exam_id) REFERENCES exam(exam_id),
-    FOREIGN KEY (question_id) REFERENCES question(question_id)    
+    PRIMARY KEY (exam_id, question_id),
+    FOREIGN KEY (exam_id) REFERENCES exam(exam_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (question_id) REFERENCES question(question_id)  ON DELETE CASCADE ON UPDATE CASCADE   
 );
 -- Thêm data vào bảng
 INSERT INTO exam_question(exam_id, question_id) 
