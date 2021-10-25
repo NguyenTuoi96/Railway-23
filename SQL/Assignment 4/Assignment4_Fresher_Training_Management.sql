@@ -34,20 +34,20 @@ CREATE TABLE employee (
 -- Thêm bản ghi
 INSERT INTO employee(employee_name, department_number) 
 VALUES 
-	('Nguyễn Ngọc Anh', '1'),
-	('Nguyễn Thanh Anh', '7'),
-    ('Phạm Thanh Thảo', '3'),
-    ('Hoàng Văn Nhã', '3'),
-    ('Phạm Thị Nhung', '4'),
-    ('Nguyễn Ngọc Mai', '5'),
-    ('Nguyễn Duy Đông', '8'),
-    ('Trần Hoài Phương', '2'),
-    ('Nguyễn Phương Ly', '9'),
-    ('Lê Thu Hiền', '2'),
-    ('Lê Thu Trang', '3'),
-    ('Hồ Thị Nguyệt', '2'),
-    ('Võ Anh Tuấn', '2'),
-    ('Vũ Thị Thu', '4');
+	('Nguyễn Ngọc Anh', 	'1'),
+	('Nguyễn Thanh Anh', 	'7'),
+    ('Phạm Thanh Thảo', 	'3'),
+    ('Hoàng Văn Nhã', 		'3'),
+    ('Phạm Thị Nhung', 		'4'),
+    ('Nguyễn Ngọc Mai', 	'5'),
+    ('Nguyễn Duy Đông', 	'8'),
+    ('Trần Hoài Phương', 	'2'),
+    ('Nguyễn Phương Ly', 	'9'),
+    ('Lê Thu Hiền', 		'2'),
+    ('Lê Thu Trang', 		'3'),
+    ('Hồ Thị Nguyệt', 		'2'),
+    ('Võ Anh Tuấn', 		'2'),
+    ('Vũ Thị Thu', 			'4');
 
 -- Employee_Skill_Table (Employee_Number, Skill_Code, Date Registered)
 DROP TABLE IF EXISTS employee_skill; 
@@ -61,20 +61,20 @@ CREATE TABLE employee_skill (
 -- Thêm bản ghi
 INSERT INTO employee_skill(employee_number, skill_code, date_registered) 
 VALUES 
-	(1, 'Java', '2020-11-01'),
-    (1, 'C#', '2019-03-05'),
-    (2, 'JavaScrip', '2020-09-06'),
-    (3, 'Java', '2019-11-09'),
-    (4, 'SQL', '2020-05-04'),
-    (5, 'C#', '2020-10-12'),
-    (6, 'Python', '2020-09-15'),
-    (7, 'Ruby', '2020-12-19'),
-    (8, 'Java', '2020-06-25'),
-    (9, 'Html', '2020-08-01'),
-    (10, 'Css', '2020-10-17'),
-    (11, 'Java', '2020-06-21'),
-    (12, 'C#', '2020-04-05'),
-    (13, 'Java', '2020-01-02');    
+	(1, 'Java', 		'2020-11-01'),
+    (1, 'C#', 			'2019-03-05'),
+    (2, 'JavaScrip', 	'2020-09-06'),
+    (3, 'Java', 		'2019-11-09'),
+    (4, 'SQL', 			'2020-05-04'),
+    (5, 'C#', 			'2020-10-12'),
+    (6, 'Python', 		'2020-09-15'),
+    (7, 'Ruby', 		'2020-12-19'),
+    (8, 'Java', 		'2020-06-25'),
+    (9, 'Html', 		'2020-08-01'),
+    (10, 'Css', 		'2020-10-17'),
+    (11, 'Java', 		'2020-06-21'),
+    (12, 'C#', 			'2020-04-05'),
+    (13, 'Java', 		'2020-01-02');    
 
 -- Question 3: Viết lệnh để lấy ra danh sách nhân viên (name) có skill Java
 SELECT e.employee_name 'nhân viên có skill Java'
@@ -99,5 +99,13 @@ GROUP BY d.department_number;
 SELECT e.*, COUNT(es.employee_number) 'số lượng skill của nhân viên'
 FROM employee e 
 JOIN employee_skill es ON e.employee_number = es.employee_number
-GROUP BY es.employee_number
+GROUP BY e.employee_number
 HAVING COUNT(es.employee_number) > 1
+
+
+
+
+
+
+
+

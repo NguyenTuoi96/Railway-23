@@ -15,18 +15,28 @@ CREATE TABLE department(
     department_name 	VARCHAR(30) CHAR SET utf8mb4 NOT NULL UNIQUE
 );
 -- Thêm data vào bảng
-INSERT INTO department(department_id, department_name) 
+INSERT INTO department(department_name) 
 VALUES 
-	(1, 'Marketing'),
-	(2, 'Sale'),
-    (3, N'Phát triển'),
-    (4, N'Nhân sự'),
-    (5, N'Kỹ thuật'),
-    (6, N'Tài chính'),
-    (7, N'Phó giám đốc'),
-    (8, N'Giám đốc'),
-    (9, N'Thư kí'),
-    (10, N'Bảo vệ');
+	('Marketing'),
+	('Sale'),
+    ('Phát triển'),
+    ('Nhân sự'),
+    ('Kỹ thuật'),
+    ('Tài chính'),
+    ('Phó giám đốc'),
+    ('Giám đốc'),
+    ('Thư kí'),
+    ('Bảo vệ'),
+	('Phòng A1'),
+	('Phòng A2'),
+    ('Phòng A3'),
+    ('Phòng A4'),
+    ('Phòng A5'),
+    ('Phòng B1'),
+    ('Phòng B2'),
+    ('Phòng B3'),
+    ('Phòng B4'),
+    ('Phòng B5');
     
 -- Table 2: Position
 --  PositionID: định danh của chức vụ (auto increment)
@@ -37,12 +47,12 @@ CREATE TABLE `position`(
     position_name 	ENUM('Dev', 'Test', 'Scrum Master', 'PM')
 );
 -- Thêm data vào bảng
-INSERT INTO `position`(position_id, position_name) 
+INSERT INTO `position`(position_name) 
 VALUES 
-	(1, 'Dev'),
-	(2, 'Test'),
-    (3, 'Scrum Master'),
-    (4, 'PM');
+	('Dev'),
+	('Test'),
+    ('Scrum Master'),
+    ('PM');
     
 -- Table 3: Account
 --  AccountID: định danh của User (auto increment)
@@ -65,18 +75,40 @@ FOREIGN KEY (department_id) REFERENCES department(department_id) ON DELETE CASCA
 FOREIGN KEY (position_id) REFERENCES `position`(position_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Thêm data vào bảng
-INSERT INTO `account`(account_id, email, username, fullname, department_id, position_id, create_date) 
+INSERT INTO `account`(email, username, fullname, department_id, position_id, create_date) 
 VALUES 
-	(1, 'nguyenhong@gmail.com', 'NguyenHong', 'Nguyễn Thị Hồng', 3, 2, '2021-10-18'),
-    (2, 'nguyenhoa@gmail.com', 'NguyenHoa', 'Nguyễn Thị Hoa', 1, 3, '2020-10-15'),
-    (3, 'phamhue@gmail.com', 'PhamHue', 'Phạm Thị Huệ', 1, 2, '2019-11-13'),
-    (4, 'hoangnha@gmail.com', 'HoangNha', 'Hoàng Phong Nhã', 6, 4, '2020-09-20'),
-    (5, 'nguyendong@gmail.com', 'NguyenDong', 'Nguyễn Văn Đông', 8, 4, '2018-05-03'),
-    (6, 'tranthanhphong@gmail.com', 'ThanhPhong', 'Trần Thanh Phong', 4, 2, '2021-09-11'),
-    (7, 'tranminhnguyet@gmail.com', 'MinhNguyet', 'Trần Minh Nguyệt', 7, 3, '2021-01-30'),
-    (8, 'nguyenan@gmail.com', 'NguyenAn', 'Nguyễn Văn An', 9, 2, '2020-02-11'),
-    (9, 'tranthithu@gmail.com', 'ThiThu', 'Trần Thị Thu', 5, 3, '2019-05-20'),
-    (10, 'thungan@gmail.com', 'ThuNgan', 'Phạm Thu Ngân', 2, 4, '2020-08-15');
+	('nguyenhong@gmail.com'		, 'NguyenHong'		, 'Nguyễn Thị Hồng'		, 3		, 2, '2010-10-18'),
+    ('nguyenhoa@gmail.com'		, 'NguyenHoa'		, 'Nguyễn Thị Hoa'		, 1		, 3, '2020-10-15'),
+    ('phamhue@gmail.com'		, 'PhamHue'			, 'Phạm Thị Huệ'		, 1		, 2, '2019-11-13'),
+    ('hoangnha@gmail.com'		, 'HoangNha'		, 'Hoàng Phong Nhã'		, 6		, 4, '2020-09-20'),
+    ('nguyendong@gmail.com'		, 'NguyenDong'		, 'Nguyễn Văn Đông'		, 8		, 1, '2018-05-03'),
+    ('tranthanhphong@gmail.com'	, 'ThanhPhong'		, 'Trần Thanh Phong'	, 4		, 2, '2021-09-11'),
+    ('tranminhnguyet@gmail.com'	, 'MinhNguyet'		, 'Trần Minh Nguyệt'	, 7		, 3, '2021-01-30'),
+    ('nguyenan@gmail.com'		, 'NguyenAn'		, 'Nguyễn Văn An'		, 9		, 2, '2020-02-11'),
+    ('tranthithu@gmail.com'		, 'ThiThu'			, 'Trần Thị Thu'		, 5		, 3, '2019-05-20'),
+    ('thungan@gmail.com'		, 'ThuNgan'			, 'Phạm Thu Ngân'		, 2		, 4, '2020-08-15'),
+	('ngocha96@gmail.com'		, 'NgocHa96'		, 'Nguyễn Ngọc Hà'		, 13	, 2, '2019-11-18'),
+    ('nguyenhuong12@gmail.com'	, 'HuongNguyen'		, 'Nguyễn Thanh Hương'	, 2		, 2, '2019-12-15'),
+    ('huongnhai@gmail.com'		, 'HuongNhai'		, 'Phạm Hương Nhài'		, 2		, 3, '2020-11-15'),
+    ('nhadan@gmail.com'			, 'NhaDan'			, 'Hoàng Nhã Đan'		, 16	, 4, '2020-08-20'),
+    ('ngocanh@gmail.com'		, 'AnhNgoc'			, 'Nguyễn Ngọc Ánh'		, 18	, 1, '2019-05-03'),
+    ('hoathanh@gmail.com'		, 'HoaThanh'		, 'Trần Thanh Hòa'		, 14	, 2, '2020-07-01'),
+    ('minhanhtran@gmail.com'	, 'MinhAn'			, 'Trần Minh An'		, 17	, 3, '2020-11-25'),
+    ('thanhanhnguyen@gmail.com'	, 'ThanhAnh'		, 'Nguyễn Thanh Anh'	, 19	, 2, '2020-03-13'),
+    ('nguyenhuong@gmail.com'	, 'NguyenHuong'		, 'Trần Thị Hường'		, 15	, 3, '2019-04-21'),
+    ('thanhlong@gmail.com'		, 'ThanhLong'		, 'Phạm Thanh Long'		, 20	, 4, '2020-08-25'),
+	('thaiha@gmail.com'			, 'ThaiHa'			, 'Nguyễn Thái Hà'		, 13	, 2, '2019-11-18'),
+    ('thanhthao@gmail.com'		, 'ThanhThao'		, 'Nguyễn Thanh Thảo'	, 11	, 2, '2019-12-15'),
+    ('thuhuongpham@gmail.com'	, 'ThuHuongPham'	, 'Phạm Thu Hương'		, 11	, 3, '2020-11-15'),
+    ('anhvu@gmail.com'			, 'AnhVu'			, 'Hoàng Anh Vũ'		, 16	, 4, '2020-08-20'),
+    ('anhthu@gmail.com'			, 'AnhThu'			, 'Nguyễn Anh Thư'		, 20	, 2, '2019-05-03'),
+    ('thanhhoatran@gmail.com'	, 'HoaTran'			, 'Trần Thanh Hoa'		, 14	, 1, '2020-07-01'),
+    ('tranthienan@gmail.com'	, 'ThienAnTran'		, 'Trần Thiên Ân'		, 17	, 3, '2020-11-25'),
+    ('nguyenmocmien@gmail.com'	, 'MocMien'			, 'Nguyễn Mộc Miên'		, 20	, 2, '2020-03-13'),
+    ('thuhuongtran@gmail.com'	, 'ThuHuong'		, 'Trần Thu Hường'		, 15	, 2, '2019-04-21'),
+    ('thanhngoc@gmail.com'		, 'ThanhNgoc'		, 'Phạm Thanh Ngọc'		, 20	, 4, '2020-08-25'),
+    ('thanhhuong01@gmail.com'	, 'ThanhHuong'		, 'Nguyễn Thanh Hương'	, 3		, 3, '2020-08-25'),
+    ('dangdao@gmail.com'		, 'DaoDang'			, 'Đặng Thanh Đào'		, 2		, 1, '2019-01-01');
     
 -- Table 4: Group
 --  GroupID: định danh của nhóm (auto increment)
@@ -92,13 +124,23 @@ CREATE TABLE `group`(
 FOREIGN KEY (creator_id) REFERENCES `account`(account_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Thêm data vào bảng
-INSERT INTO `group`(group_id, group_name, creator_id, create_date) 
+INSERT INTO `group`(group_name, creator_id, create_date) 
 VALUES 
-	(1, N'Nhóm A', 1, '2021-10-18'),
-	(2, N'Nhóm B', 5, '2021-10-19'),
-	(3, N'Nhóm C', 3, '2021-09-10'),
-	(4, N'Nhóm D', 4, '2021-08-21'),
-	(5, N'Nhóm E', 7, '2021-10-01');
+	('Nhóm A'	, 1	, '2021-10-18'),
+	('Nhóm B'	, 5	, '2021-10-19'),
+	('Nhóm C'	, 3	, '2021-09-10'),
+	('Nhóm D'	, 4	, '2021-08-21'),
+	('Nhóm E'	, 7	, '2021-10-01'),
+	('Nhóm A1'	, 11, '2021-10-18'),
+	('Nhóm B1'	, 15, '2021-10-19'),
+	('Nhóm C1'	, 13, '2021-09-10'),
+	('Nhóm D1'	, 14, '2021-08-21'),
+	('Nhóm E1'	, 17, '2021-10-01'),
+	('Nhóm A2'	, 18, '2021-10-01'),
+	('Nhóm B2'	, 19, '2021-10-01'),
+	('Nhóm C2'	, 20, '2021-10-01'),
+	('Nhóm D2'	, 12, '2021-10-01'),
+	('Nhóm E2'	, 16, '2019-10-01');
     
 -- Table 5: GroupAccount
 --  GroupID: định danh của nhóm
@@ -116,16 +158,26 @@ CREATE TABLE group_account(
 -- Thêm data vào bảng
 INSERT INTO group_account(group_id, account_id, join_date) 
 VALUES 
-	(1, 1, '2021-10-18'),
-	(1, 2, '2021-10-18'),
-	(2, 5, '2021-10-19'),
-	(2, 9, '2021-10-19'),
-	(3, 3, '2021-09-10'),
-	(3, 6, '2021-09-10'),
-	(4, 4, '2021-08-21'),
-	(4, 8, '2021-08-21'),
-	(5, 7, '2021-10-01'),
-	(5, 10, '2021-10-01');
+	(1	, 1	, '2021-10-18'),
+	(1	, 2	, '2021-10-18'),
+	(2	, 5	, '2021-10-19'),
+	(2	, 9	, '2021-10-19'),
+	(2	, 1	, '2021-09-10'),
+	(3	, 6	, '2021-09-10'),
+	(2	, 4	, '2021-08-21'),
+	(4	, 8	, '2021-08-21'),
+	(5	, 7	, '2021-10-01'),
+	(5	, 10, '2021-10-01'),
+	(6	, 21, '2021-10-18'),
+	(7	, 22, '2021-10-18'),
+	(8	, 25, '2021-10-19'),
+	(9	, 29, '2021-10-19'),
+	(10	, 23, '2021-09-10'),
+	(11	, 26, '2021-09-10'),
+	(12	, 24, '2021-08-21'),
+	(2	, 15, '2021-08-21'),
+	(14	, 27, '2021-10-01'),
+	(2	, 28, '2021-10-01');
     
 -- Table 6: TypeQuestion
 --  TypeID: định danh của loại câu hỏi (auto increment)
@@ -136,10 +188,10 @@ CREATE TABLE type_question(
     type_name 	ENUM('Essay', 'Multiple-Choice')
 );
 -- Thêm data vào bảng
-INSERT INTO type_question(type_id, type_name) 
+INSERT INTO type_question(type_name) 
 VALUES 
-	(1, 'Essay'),
-	(2, 'Multiple-Choice');
+	('Essay'),
+	('Multiple-Choice');
     
 -- Table 7: CategoryQuestion
 --  CategoryID: định danh của chủ đề câu hỏi (auto increment)
@@ -151,16 +203,28 @@ CREATE TABLE category_question(
     category_name 	VARCHAR(50) CHAR SET utf8mb4 NOT NULL UNIQUE
 );
 -- Thêm data vào bảng
-INSERT INTO category_question(category_id, category_name) 
+INSERT INTO category_question(category_name) 
 VALUES 
-	(1, 'Java'),
-	(2, '.NET'),
-	(3, 'SQL'),
-	(4, 'Postman'),
-	(5, 'Ruby'),
-	(6, 'VBA'),
-	(7, 'C#'),
-	(8, 'js');
+	('Java'),
+	('.NET'),
+	('SQL'),
+	('Postman'),
+	('Ruby'),
+	('VBA'),
+	('C#'),
+	('js'),
+	('PHP'),
+	('Python'),
+	('Jquery'),
+	('React'),
+	('Html'),
+	('Css'),
+	('C++'),
+	('C'),
+	('Bootstrap'),
+	('Vue'),
+	('NodeJs'),
+	('Angular');
     
 -- Table 8: Question
 --  QuestionID: định danh của câu hỏi (auto increment)
@@ -182,15 +246,25 @@ CREATE TABLE question(
     FOREIGN KEY (creator_id) REFERENCES `account`(account_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Thêm data vào bảng
-INSERT INTO question(question_id, content, category_id, type_id, creator_id, create_date) 
+INSERT INTO question(content, category_id, type_id, creator_id, create_date) 
 VALUES 
-	(1, 'content test 1', 2, 1, 1, '2021-10-11'),
-	(2, 'content test 2', 4, 2, 3, '2021-10-11'),
-	(3, 'content test 3', 3, 1, 2, '2021-10-11'),
-	(4, 'content test 4', 5, 2, 6, '2021-10-11'),
-	(5, 'content test 5', 8, 2, 8, '2021-10-11'),
-	(6, 'content test 6', 7, 1, 7, '2021-10-11'),
-	(7, 'content test 7', 6, 1, 4, '2021-10-11');
+	('content test 1'			, 2	, 1, 1	, '2021-10-11'),
+	('content test 2'			, 4	, 2, 3	, '2021-10-11'),
+	('content test 3'			, 3	, 1, 2	, '2021-10-11'),
+	('content test 4'			, 5	, 1, 6	, '2021-10-11'),
+	('content test 5'			, 8	, 1, 8	, '2021-10-11'),
+	('content test 6'			, 7	, 1, 7	, '2021-10-11'),
+	('content test 7'			, 6	, 1, 4	, '2021-10-11'),
+	('content question test 8'	, 12, 2, 11	, '2021-01-11'),
+	('content question test 9'	, 14, 1, 13	, '2021-01-11'),
+	('câu hỏi question test 10'	, 13, 1, 12	, '2021-01-11'),
+	('content question test 11'	, 15, 1, 16	, '2021-01-11'),
+	('câu hỏi question test 12'	, 18, 2, 18	, '2021-01-11'),
+	('câu hỏi question test 13'	, 19, 1, 17	, '2021-01-11'),
+	('content question test 14'	, 15, 2, 16	, '2021-01-11'),
+	('câu hỏi question test 15'	, 18, 1, 18	, '2021-01-11'),
+	('content question test 16'	, 17, 1, 17	, '2021-01-11'),
+	('câu hỏi question test 17'	, 20, 1, 14	, '2021-01-11');
     
 -- Table 9: Answer
 --  AnswerID: định danh của câu trả lời (auto increment)
@@ -206,15 +280,25 @@ CREATE TABLE answer(
     FOREIGN KEY (question_id) REFERENCES question(question_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Thêm data vào bảng
-INSERT INTO answer(answer_id, content, question_id, is_correct) 
+INSERT INTO answer(content, question_id, is_correct) 
 VALUES 
-	(1, 'content answer test 1', 2, 1),
-	(2, 'content answer test 2', 4, 0),
-	(3, 'content answer test 3', 3, 1),
-	(4, 'content answer test 4', 5, 0),
-	(5, 'content answer test 5', 1, 1),
-	(6, 'content answer test 6', 7, 1),
-	(7, 'content answer test 7', 6, 1);
+	('content answer test 1'	, 2		, 1),
+	('content answer test 2'	, 3		, 0),
+	('content answer test 3'	, 3		, 1),
+	('content answer test 4'	, 5		, 0),
+	('content answer test 5'	, 1		, 1),
+	('content answer test 6'	, 7		, 1),
+	('content answer test 7'	, 6		, 1),
+	('content answer test 8'	, 12	, 1),
+	('content answer test 9'	, 2		, 1),
+	('content answer test 10'	, 2		, 1),
+	('content answer test 11'	, 2		, 1),
+	('content answer test 12'	, 14	, 0),
+	('content answer test 13'	, 13	, 1),
+	('content answer test 14'	, 15	, 0),
+	('content answer test 15'	, 11	, 1),
+	('content answer test 16'	, 17	, 1),
+	('content answer test 17'	, 16	, 1);
     
 -- Table 10: Exam
 --  ExamID: định danh của đề thi (auto increment)
@@ -237,14 +321,26 @@ CREATE TABLE exam(
     FOREIGN KEY (creator_id) REFERENCES `account`(account_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Thêm data vào bảng
-INSERT INTO exam(exam_id, `code`, title, category_id, duration, creator_id, create_date) 
+INSERT INTO exam(`code`, title, category_id, duration, creator_id, create_date) 
 VALUES 
-	(1, 'RB', 'title ruby', 5, 50, 1, '2021-05-05'),
-	(2, 'VB', 'title vb 1', 6, 120, 3, '2021-06-15'),
-	(3, 'JS', 'title exam js', 8, 60, 2, '2021-06-25'),
-	(4, 'PM', 'title postman', 4, 120, 6, '2021-09-05'),
-	(5, 'SQ', 'title sql exam', 3, 45, 3, '2021-10-11'),
-	(6, 'C#', 'title exam C#', 7, 15, 5, '2021-10-15');
+	('RB'	, 'title ruby'		, 5		, 50	, 1		, '2021-05-05'),
+	('VB'	, 'title vb 1'		, 6		, 120	, 3		, '2021-06-15'),
+	('JS'	, 'title exam js'	, 8		, 60	, 2		, '2021-06-25'),
+	('PM'	, 'title postman'	, 4		, 120	, 6		, '2021-09-05'),
+	('SQ'	, 'title sql exam'	, 3		, 45	, 3		, '2021-10-11'),
+	('C#'	, 'title exam C#'	, 7		, 15	, 5		, '2021-10-15'),
+	('PH'	, 'title php'		, 9		, 50	, 11	, '2021-05-05'),
+	('PT'	, 'title python'	, 10	, 120	, 13	, '2021-06-15'),
+	('JQ'	, 'title jquery'	, 11	, 60	, 12	, '2021-06-25'),
+	('RC'	, 'title react'		, 12	, 120	, 6		, '2021-09-05'),
+	('HT'	, 'title html'		, 13	, 45	, 13	, '2021-10-11'),
+	('CCS'	, 'title css'		, 14	, 120	, 15	, '2021-10-15'),
+	('C+'	, 'title c++'		, 15	, 60	, 12	, '2021-06-25'),
+	('C'	, 'title C'			, 16	, 120	, 16	, '2021-09-05'),
+	('BT'	, 'title Bootstrap'	, 17	, 45	, 13	, '2021-10-11'),
+	('AG'	, 'Angular'			, 18	, 120	, 15	, '2021-10-15'),
+	('JN'	, 'Json'			, 19	, 120	, 15	, '2019-10-15'),
+	('AJ'	, 'Ajax'			, 20	, 120	, 15	, '2021-10-15');
     
 -- Table 11: ExamQuestion
 --  ExamID: định danh của đề thi
@@ -260,9 +356,19 @@ CREATE TABLE exam_question(
 -- Thêm data vào bảng
 INSERT INTO exam_question(exam_id, question_id) 
 VALUES 
-	(1, 4),
-	(2, 7),
-	(3, 5),
-	(4, 2),
-	(5, 3),
-	(6, 6);
+	(1	, 4),
+	(2	, 7),
+	(3	, 6),
+	(4	, 2),
+	(5	, 3),
+	(6	, 6),
+	(10	, 8),
+	(11	, 11),
+	(12	, 9),
+	(13	, 11),
+	(13	, 14),
+	(15	, 16),
+	(16	, 12),
+	(16	, 15),
+    (17	, 13),
+    (18	, 17);
