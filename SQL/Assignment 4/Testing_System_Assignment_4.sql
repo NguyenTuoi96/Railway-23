@@ -32,7 +32,7 @@ SELECT * FROM department;
 SELECT dp.department_name
 FROM department dp
 JOIN `account` ac ON dp.department_id = ac.department_id 
-GROUP BY ac.department_id 
+GROUP BY dp.department_id 
 HAVING COUNT(ac.account_id) > 3;
 
 -- Question 5: Viết lệnh để lấy ra danh sách câu hỏi được sử dụng trong đề thi nhiều nhất
@@ -74,7 +74,7 @@ SELECT * FROM question;
 SELECT cq.category_name, COUNT(q.question_id) AS 'số lượng question'
 FROM category_question cq
 LEFT JOIN question q ON cq.category_id = q.category_id 
-GROUP BY q.category_id, cq.category_name;
+GROUP BY cq.category_id;
 
 -- Question 7: Thông kê mỗi Question được sử dụng trong bao nhiêu Exam
 SELECT * FROM question;
@@ -107,13 +107,13 @@ SELECT * FROM answer;
 
 SELECT q.content -- , COUNT(a.answer_id)
 FROM question q 
-JOIN answer a ON q.question_id = a.question_id
-GROUP BY a.question_id
+JOIN answer a ON a.question_id = q.question_id
+GROUP BY q.question_id
 HAVING COUNT(a.answer_id) = (
 SELECT MAX(tmp.ans_cnt) FROM
-	(SELECT COUNT(a.answer_id) ans_cnt
-    FROM answer a 
-    GROUP BY a.question_id) tmp
+	(SELECT COUNT(answer_id) ans_cnt
+    FROM answer 
+    GROUP BY question_id) tmp
 );
 
 -- Question 9: Thống kê số lượng account trong mỗi group
@@ -153,7 +153,7 @@ GROUP BY p.position_id
 HAVING COUNT(a.account_id) = (
 	SELECT MIN(tmp.cnt_acc) 
 	FROM 
-		(SELECT COUNT(ac.position_id) cnt_acc
+		(SELECT COUNT(ac.account_id) cnt_acc
 		FROM `position` p 
 		LEFT JOIN `account` ac ON p.position_id = ac.position_id
 		GROUP BY p.position_id) tmp
@@ -200,7 +200,7 @@ SELECT q.question_id
         , caq.category_name 'chủ đề câu hỏi'
         , acc.fullname 'người tạo ra câu hỏi'
         , an.content 'câu trả lời'
-        , e.code 'mã đề thi sử dụng câu hỏi'
+        , e.`code` 'mã đề thi sử dụng câu hỏi'
 FROM question q 
 LEFT JOIN type_question tq ON q.type_id = tq.type_id 
 LEFT JOIN category_question caq ON q.category_id = caq.category_id
@@ -213,7 +213,7 @@ LEFT JOIN exam e ON eq.exam_id = e.exam_id;
 SELECT * FROM type_question;
 SELECT * FROM question;
 
-SELECT tq.type_name, COUNT(q.type_id) 'số lượng câu hỏi' 
+SELECT tq.type_name, COUNT(q.question_id) 'số lượng câu hỏi' 
 FROM type_question tq 
 LEFT JOIN question q ON tq.type_id = q.type_id 
 GROUP BY q.type_id;
