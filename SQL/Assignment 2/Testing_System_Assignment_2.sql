@@ -68,6 +68,7 @@ CREATE TABLE `account`(
     email 			VARCHAR(50) UNIQUE NOT NULL,
     username 		VARCHAR(20) UNIQUE NOT NULL,
     fullname 		VARCHAR(50) CHAR SET utf8mb4 NOT NULL,
+    gender  		CHAR(20),
     department_id 	TINYINT NOT NULL,
     position_id 	TINYINT NOT NULL,
     create_date 	DATE,
@@ -75,40 +76,40 @@ FOREIGN KEY (department_id) REFERENCES department(department_id) ON DELETE CASCA
 FOREIGN KEY (position_id) REFERENCES `position`(position_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- Thêm data vào bảng
-INSERT INTO `account`(email, username, fullname, department_id, position_id, create_date) 
+INSERT INTO `account`(email, username, fullname, gender, department_id, position_id, create_date) 
 VALUES 
-	('nguyenhong@gmail.com'		, 'NguyenHong'		, 'Nguyễn Thị Hồng'		, 3		, 2, '2010-10-18'),
-    ('nguyenhoa@gmail.com'		, 'NguyenHoa'		, 'Nguyễn Thị Hoa'		, 1		, 3, '2020-10-15'),
-    ('phamhue@gmail.com'		, 'PhamHue'			, 'Phạm Thị Huệ'		, 1		, 2, '2019-11-13'),
-    ('hoangnha@gmail.com'		, 'HoangNha'		, 'Hoàng Phong Nhã'		, 6		, 4, '2020-09-20'),
-    ('nguyendong@gmail.com'		, 'NguyenDong'		, 'Nguyễn Văn Đông'		, 8		, 1, '2018-05-03'),
-    ('tranthanhphong@gmail.com'	, 'ThanhPhong'		, 'Trần Thanh Phong'	, 4		, 2, '2021-09-11'),
-    ('tranminhnguyet@gmail.com'	, 'MinhNguyet'		, 'Trần Minh Nguyệt'	, 7		, 3, '2021-01-30'),
-    ('nguyenan@gmail.com'		, 'NguyenAn'		, 'Nguyễn Văn An'		, 9		, 2, '2020-02-11'),
-    ('tranthithu@gmail.com'		, 'ThiThu'			, 'Trần Thị Thu'		, 5		, 3, '2019-05-20'),
-    ('thungan@gmail.com'		, 'ThuNgan'			, 'Phạm Thu Ngân'		, 2		, 4, '2020-08-15'),
-	('ngocha96@gmail.com'		, 'NgocHa96'		, 'Nguyễn Ngọc Hà'		, 13	, 2, '2019-11-18'),
-    ('nguyenhuong12@gmail.com'	, 'HuongNguyen'		, 'Nguyễn Thanh Hương'	, 2		, 2, '2019-12-15'),
-    ('huongnhai@gmail.com'		, 'HuongNhai'		, 'Phạm Hương Nhài'		, 2		, 3, '2020-11-15'),
-    ('nhadan@gmail.com'			, 'NhaDan'			, 'Hoàng Nhã Đan'		, 16	, 4, '2020-08-20'),
-    ('ngocanh@gmail.com'		, 'AnhNgoc'			, 'Nguyễn Ngọc Ánh'		, 18	, 1, '2019-05-03'),
-    ('hoathanh@gmail.com'		, 'HoaThanh'		, 'Trần Thanh Hòa'		, 14	, 2, '2020-07-01'),
-    ('minhanhtran@gmail.com'	, 'MinhAn'			, 'Trần Minh An'		, 17	, 3, '2020-11-25'),
-    ('thanhanhnguyen@gmail.com'	, 'ThanhAnh'		, 'Nguyễn Thanh Anh'	, 19	, 2, '2020-03-13'),
-    ('nguyenhuong@gmail.com'	, 'NguyenHuong'		, 'Trần Thị Hường'		, 15	, 3, '2019-04-21'),
-    ('thanhlong@gmail.com'		, 'ThanhLong'		, 'Phạm Thanh Long'		, 20	, 4, '2020-08-25'),
-	('thaiha@gmail.com'			, 'ThaiHa'			, 'Nguyễn Thái Hà'		, 13	, 2, '2019-11-18'),
-    ('thanhthao@gmail.com'		, 'ThanhThao'		, 'Nguyễn Thanh Thảo'	, 11	, 2, '2019-12-15'),
-    ('thuhuongpham@gmail.com'	, 'ThuHuongPham'	, 'Phạm Thu Hương'		, 11	, 3, '2020-11-15'),
-    ('anhvu@gmail.com'			, 'AnhVu'			, 'Hoàng Anh Vũ'		, 16	, 4, '2020-08-20'),
-    ('anhthu@gmail.com'			, 'AnhThu'			, 'Nguyễn Anh Thư'		, 20	, 2, '2019-05-03'),
-    ('thanhhoatran@gmail.com'	, 'HoaTran'			, 'Trần Thanh Hoa'		, 14	, 1, '2020-07-01'),
-    ('tranthienan@gmail.com'	, 'ThienAnTran'		, 'Trần Thiên Ân'		, 17	, 3, '2020-11-25'),
-    ('nguyenmocmien@gmail.com'	, 'MocMien'			, 'Nguyễn Mộc Miên'		, 20	, 2, '2020-03-13'),
-    ('thuhuongtran@gmail.com'	, 'ThuHuong'		, 'Trần Thu Hường'		, 15	, 2, '2019-04-21'),
-    ('thanhngoc@gmail.com'		, 'ThanhNgoc'		, 'Phạm Thanh Ngọc'		, 20	, 4, '2020-08-25'),
-    ('thanhhuong01@gmail.com'	, 'ThanhHuong'		, 'Nguyễn Thanh Hương'	, 3		, 3, '2020-08-25'),
-    ('dangdao@gmail.com'		, 'DaoDang'			, 'Đặng Thanh Đào'		, 2		, 1, '2019-01-01');
+	('nguyenhong@gmail.com'		, 'NguyenHong'		, 'Nguyễn Thị Hồng'		, 'F', 3	, 2, '2010-10-18'),
+    ('nguyenhoa@gmail.com'		, 'NguyenHoa'		, 'Nguyễn Thị Hoa'		, 'F', 1	, 3, '2020-10-15'),
+    ('phamhue@gmail.com'		, 'PhamHue'			, 'Phạm Thị Huệ'		, 'F', 1	, 2, '2019-11-13'),
+    ('hoangnha@gmail.com'		, 'HoangNha'		, 'Hoàng Phong Nhã'		, 'M', 6	, 4, '2020-09-20'),
+    ('nguyendong@gmail.com'		, 'NguyenDong'		, 'Nguyễn Văn Đông'		, 'M', 8	, 1, '2018-05-03'),
+    ('tranthanhphong@gmail.com'	, 'ThanhPhong'		, 'Trần Thanh Phong'	, 'M', 4	, 2, '2021-09-11'),
+    ('tranminhnguyet@gmail.com'	, 'MinhNguyet'		, 'Trần Minh Nguyệt'	, 'F', 7	, 3, '2021-01-30'),
+    ('nguyenan@gmail.com'		, 'NguyenAn'		, 'Nguyễn Văn An'		, 'M', 9	, 2, '2020-02-11'),
+    ('tranthithu@gmail.com'		, 'ThiThu'			, 'Trần Thị Thu'		, 'F', 5	, 3, '2019-05-20'),
+    ('thungan@gmail.com'		, 'ThuNgan'			, 'Phạm Thu Ngân'		, 'F', 2	, 4, '2020-08-15'),
+	('ngocha96@gmail.com'		, 'NgocHa96'		, 'Nguyễn Ngọc Hà'		, 'F', 13	, 2, '2019-11-18'),
+    ('nguyenhuong12@gmail.com'	, 'HuongNguyen'		, 'Nguyễn Thanh Hương'	, 'F', 2	, 2, '2019-12-15'),
+    ('huongnhai@gmail.com'		, 'HuongNhai'		, 'Phạm Hương Nhài'		, 'F', 2	, 3, '2020-11-15'),
+    ('nhadan@gmail.com'			, 'NhaDan'			, 'Hoàng Nhã Đan'		, 'F', 16	, 4, '2020-08-20'),
+    ('ngocanh@gmail.com'		, 'AnhNgoc'			, 'Nguyễn Ngọc Ánh'		, 'F', 18	, 1, '2019-05-03'),
+    ('hoathanh@gmail.com'		, 'HoaThanh'		, 'Trần Thanh Hòa'		, 'M', 14	, 2, '2020-07-01'),
+    ('minhanhtran@gmail.com'	, 'MinhAn'			, 'Trần Minh An'		, 'F', 17	, 3, '2020-11-25'),
+    ('thanhanhnguyen@gmail.com'	, 'ThanhAnh'		, 'Nguyễn Thanh Anh'	, 'F', 19	, 2, '2020-03-13'),
+    ('nguyenhuong@gmail.com'	, 'NguyenHuong'		, 'Trần Thị Hường'		, 'F', 15	, 3, '2019-04-21'),
+    ('thanhlong@gmail.com'		, 'ThanhLong'		, 'Phạm Thanh Long'		, 'M', 20	, 4, '2020-08-25'),
+	('thaiha@gmail.com'			, 'ThaiHa'			, 'Nguyễn Thái Hà'		, 'F', 13	, 2, '2019-11-18'),
+    ('thanhthao@gmail.com'		, 'ThanhThao'		, 'Nguyễn Thanh Thảo'	, 'F', 11	, 2, '2019-12-15'),
+    ('thuhuongpham@gmail.com'	, 'ThuHuongPham'	, 'Phạm Thu Hương'		, 'F', 11	, 3, '2020-11-15'),
+    ('anhvu@gmail.com'			, 'AnhVu'			, 'Hoàng Anh Vũ'		, 'M', 16	, 4, '2020-08-20'),
+    ('anhthu@gmail.com'			, 'AnhThu'			, 'Nguyễn Anh Thư'		, 'F', 20	, 2, '2019-05-03'),
+    ('thanhhoatran@gmail.com'	, 'HoaTran'			, 'Trần Thanh Hoa'		, 'F', 14	, 1, '2020-07-01'),
+    ('tranthienan@gmail.com'	, 'ThienAnTran'		, 'Trần Thiên Ân'		, 'F', 17	, 3, '2020-11-25'),
+    ('nguyenmocmien@gmail.com'	, 'MocMien'			, 'Nguyễn Mộc Miên'		, 'F', 20	, 2, '2020-03-13'),
+    ('thuhuongtran@gmail.com'	, 'ThuHuong'		, 'Trần Thu Hường'		, 'F', 15	, 2, '2019-04-21'),
+    ('thanhngoc@gmail.com'		, 'ThanhNgoc'		, 'Phạm Thanh Ngọc'		, 'F', 20	, 4, '2020-08-25'),
+    ('thanhhuong01@gmail.com'	, 'ThanhHuong'		, 'Nguyễn Thanh Hương'	, 'F', 3	, 3, '2020-08-25'),
+    ('dangdao@gmail.com'		, 'DaoDang'			, 'Đặng Thanh Đào'		, 'F', 2	, 1, '2019-01-01');
     
 -- Table 4: Group
 --  GroupID: định danh của nhóm (auto increment)
@@ -283,10 +284,12 @@ CREATE TABLE answer(
 INSERT INTO answer(content, question_id, is_correct) 
 VALUES 
 	('content answer test 1'	, 2		, 1),
-	('content answer test 2'	, 3		, 0),
+	('content answer test 2'	, 3		, 1),
 	('content answer test 3'	, 3		, 1),
-	('content answer test 4'	, 5		, 0),
-	('content answer test 5'	, 1		, 1),
+	('content answer test 4'	, 3		, 0),
+	('content answer test 1'	, 1		, 0),
+	('content answer test 22'	, 1		, 0),
+	('content answer test 12'	, 1		, 0),
 	('content answer test 6'	, 7		, 1),
 	('content answer test 7'	, 6		, 1),
 	('content answer test 8'	, 12	, 1),
@@ -338,9 +341,9 @@ VALUES
 	('C+'	, 'title c++'		, 15	, 60	, 12	, '2021-06-25'),
 	('C'	, 'title C'			, 16	, 120	, 16	, '2021-09-05'),
 	('BT'	, 'title Bootstrap'	, 17	, 45	, 13	, '2021-10-11'),
-	('AG'	, 'Angular'			, 18	, 120	, 15	, '2021-10-15'),
-	('JN'	, 'Json'			, 19	, 120	, 15	, '2019-10-15'),
-	('AJ'	, 'Ajax'			, 20	, 120	, 15	, '2021-10-15');
+	('AG'	, 'Angular'			, 18	, 120	, 15	, '2019-10-15'),
+	('JN'	, 'Json'			, 19	, 120	, 15	, '2021-10-31'),
+	('AJ'	, 'Ajax'			, 20	, 120	, 15	, '2021-10-30');
     
 -- Table 11: ExamQuestion
 --  ExamID: định danh của đề thi
@@ -356,7 +359,16 @@ CREATE TABLE exam_question(
 -- Thêm data vào bảng
 INSERT INTO exam_question(exam_id, question_id) 
 VALUES 
-	(1	, 4),
+	(1	, 15),
+    (1	, 5),
+    (1	, 6),
+    (1	, 7),
+    (1	, 8),
+    (1	, 9),
+    (1	, 1),
+    (1	, 2),
+    (1	, 3),
+    (1	, 4),
 	(2	, 7),
 	(3	, 6),
 	(4	, 2),
@@ -371,4 +383,4 @@ VALUES
 	(16	, 12),
 	(16	, 15),
     (17	, 13),
-    (18	, 17);
+    (18	, 16);

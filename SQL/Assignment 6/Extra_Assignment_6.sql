@@ -38,7 +38,8 @@ values
 	(1, 'dự án A', '2019-01-01', 'description dự án A', 'detailt dự án A', '2019-02-01'),
 	(2, 'dự án B', '2021-09-05', 'description dự án B', 'detailt dự án B', '2021-10-01'),
 	(2, 'dự án C', '2020-04-01', 'description dự án C', 'detailt dự án C', '2021-02-01'),
-	(1, 'dự án D', '2021-10-01', 'description dự án D', 'detailt dự án D', null);
+	(1, 'dự án D', '2021-10-01', 'description dự án D', 'detailt dự án D', '2022-03-01'),
+	(3, 'dự án E', '2021-11-01', 'description dự án D', 'detailt dự án E', '2022-02-01');
 
 drop table if exists project_modules;
 create table project_modules(

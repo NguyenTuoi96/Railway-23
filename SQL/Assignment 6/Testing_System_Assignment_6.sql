@@ -75,11 +75,12 @@ DELIMITER $$
 create procedure sp_lay_ten_type_nhieu_cau_hoi_nhat()
 	begin
 		declare tenLoaiCauHoi enum('Essay','Multiple-Choice');
-		set @id_type = '';
-		call sp_lay_type_id_nhieu_cau_hoi_nhat(@id_type);
+        declare id_type tinyint;
+		set id_type = 0;
+		call sp_lay_type_id_nhieu_cau_hoi_nhat(id_type);
         select type_name into tenLoaiCauHoi
         from type_question 
-        where type_id = (select @id_type);
+        where type_id = id_type;
         select tenLoaiCauHoi;
     end$$
 DELIMITER ;
@@ -129,6 +130,24 @@ DELIMITER ;
 -- gọi thủ tục
 call sp_lay_group_or_user('nguyenỳgejsdfc');
 
+-- cách 2
+drop procedure if exists sp_lay_group_or_user_2;
+DELIMITER $$
+create procedure sp_lay_group_or_user_2(in inputString varchar(50) char set utf8mb4)
+	begin
+		select concat('group chứa chuỗi: ', group_name) 'group, account chứa chuỗi'
+		from `group`
+		where group_name like concat('%', inputString, '%') collate utf8mb4_general_ci 
+		union all 
+		select concat('user chứa chuỗi: ', fullname) 'group, account chứa chuỗi'
+		from `account`
+		where username like concat('%', inputString, '%') collate utf8mb4_general_ci;
+    end$$
+DELIMITER ;
+-- gọi thủ tục
+call sp_lay_group_or_user_2('nguyen');
+
+
 -- Question 7: Viết 1 store cho phép người dùng nhập vào thông tin fullName, email và
 -- trong store sẽ tự động gán:
 -- username sẽ giống email nhưng bỏ phần @..mail đi
@@ -144,11 +163,11 @@ DELIMITER $$
 create procedure sp_insert_account(in fullnameInput varchar(50) char set utf8mb4, in emailInput varchar(50))
 	begin
 		-- khởi tạo biến
-        declare userName varchar(20);
-        declare positionId tinyint;
-        declare departmentId tinyint;
+        declare userNameInput varchar(20);
+        declare positionId tinyint unsigned;
+        declare departmentId tinyint unsigned;
         
-		set userName = SUBSTRING_INDEX(emailInput, '@', 1);
+		set userNameInput = SUBSTRING_INDEX(emailInput, '@', 1);
         set positionId = null;
         set departmentId = null;
         
@@ -163,17 +182,16 @@ create procedure sp_insert_account(in fullnameInput varchar(50) char set utf8mb4
         where department_name = 'Phòng chờ';
         
         -- insert bảng account
-        insert into `account`(email, username, fullname, department_id, position_id)
-        values (emailInput, userName, fullnameInput, departmentId, positionId);
+        insert into `account`(email, username, fullname, department_id, position_id, create_date)
+        values (emailInput, userNameInput, fullnameInput, departmentId, positionId, curdate());
         
         -- in ra kết quả tạo thành công
-        select * 
-        from `account` 
-        where account_id = (select max(account_id) max_id from `account`);
+         select * 
+         from `account` where username = userNameInput;
     end$$
 DELIMITER ;
 -- gọi thủ tục
-call sp_insert_account('Hoàng Anh Nhã', 'nhahoang23081995@gmail.com');
+call sp_insert_account('Hoàng Anh Nhã', 'nhahaoang23081995@gmail.com');
 
 -- Question 8: Viết 1 store cho phép người dùng nhập vào Essay hoặc Multiple-Choice
 -- để thống kê câu hỏi essay hoặc multiple-choice nào có content dài nhất
@@ -193,7 +211,25 @@ begin
 end$$
 DELIMITER ;
 -- gọi thủ tục
-call sp_cau_hoi_co_content_dai_nhat('Multiple-Choice');
+call sp_cau_hoi_co_content_dai_nhat('Essay');
+
+-- cách 2
+drop procedure if exists sp_cau_hoi_co_content_dai_nhat_2;
+DELIMITER $$
+create procedure sp_cau_hoi_co_content_dai_nhat_2(in typeName enum('Essay','Multiple-Choice'))
+begin
+	declare typeId tinyint;
+    select type_id into typeId from type_question where type_name = typeName;
+    select * from question 
+    where type_id = typeId 
+    and length(content) = (
+		select max(length(content)) from question where type_id = typeId 
+    );
+end$$
+DELIMITER ;
+-- gọi thủ tục
+call sp_cau_hoi_co_content_dai_nhat_2('Essay');
+call sp_cau_hoi_co_content_dai_nhat_2('Multiple-Choice');
 
 -- Question 9: Viết 1 store cho phép người dùng xóa exam dựa vào ID
 drop procedure if exists sp_delete_exam_by_id;
@@ -295,17 +331,18 @@ drop procedure if exists sp_thong_ke_cau_hoi_cac_thang;
 DELIMITER $$
 create procedure sp_thong_ke_cau_hoi_cac_thang()
 begin
+	declare i tinyint;
 	-- tạo bảng tạm
     drop temporary table if exists tmp_cac_thang;
     create temporary table tmp_cac_thang(
 		thang_trong_nam tinyint
     ); 
     -- insert dữ liệu vào bảng tạm(12 tháng)
-    set @i = 1;
-    while (@i <= 12) do
+    set i = 1;
+    while (i <= 12) do
 		insert into tmp_cac_thang (thang_trong_nam)
-        values (@i);
-    set @i = @i + 1;
+        values (i);
+    set i = i + 1;
     end while;
     
     -- lấy kết quả câu hỏi được tạo trong năm nay
