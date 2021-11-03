@@ -356,7 +356,6 @@ CREATE PROCEDURE sp_lay_luong_thang_chi_tiet(IN inputId INT(10))
 		DECLARE targetMonth VARCHAR(2);
 		DECLARE targetYear VARCHAR(4);
 		DECLARE tongVal DOUBLE(12, 2);
-		DECLARE i INT;
 		-- biến để xem cursor đã đến dòng cuối chưa
 		DECLARE doneMonth BOOLEAN DEFAULT FALSE;
 		-- tạo cursor các tháng lương của user nhập vào
@@ -409,12 +408,11 @@ CREATE PROCEDURE sp_lay_luong_thang_chi_tiet(IN inputId INT(10))
 						WHERE u.id = inputId -- user_id nhập vào
 						AND s.`month` = targetMonth
 						AND s.`year` = targetYear
-						ORDER BY sdt.id;
+						ORDER BY sd.operation;
 					
 					-- điều khiển hoạt động của cursor khi đến dòng cuối(set là true)
 					DECLARE CONTINUE HANDLER FOR NOT FOUND SET done_luong = TRUE;
-					SET tongVal = 0;   
-					SET i = 0;
+					SET tongVal = 0;
 					-- mở cur_luong
 					OPEN cur_luong;
 						-- lặp từng dòng
@@ -430,20 +428,15 @@ CREATE PROCEDURE sp_lay_luong_thang_chi_tiet(IN inputId INT(10))
 							-- trường hợp này sẽ tính tổng lương từ trên xuống theo id của bảng salary_detail_type. 
 							-- --> phép tính sẽ tính từ trái sang phải (không quan tâm cộng trừ nhân chia)
 							-- --> nếu bắt buộc phải nhân chia trước công trừ sau đúng toán học --> nghĩ là sẽ không thể làm được
-							IF i = 0 THEN 
-								SET tongVal = amonthVal;
-							ELSE 
-								IF operationVal = 1 THEN
-								  SET tongVal = tongVal + amonthVal;
-								ELSEIF operationVal = 2 THEN
-								  SET tongVal = tongVal - amonthVal;
-								ELSEIF operationVal = 3 THEN
-								  SET tongVal = tongVal * amonthVal;
-								ELSEIF operationVal = 4 THEN
-								  SET tongVal = tongVal / amonthVal;
-								END IF;
+							IF operationVal = 1 THEN
+							  SET tongVal = tongVal + amonthVal;
+							ELSEIF operationVal = 2 THEN
+							  SET tongVal = tongVal - amonthVal;
+							ELSEIF operationVal = 3 THEN
+							  SET tongVal = tongVal * amonthVal;
+							ELSEIF operationVal = 4 THEN
+							  SET tongVal = tongVal / amonthVal;
 							END IF;
-							SET i = i + 1;
 							
 						END LOOP read_loop_luong;	  
 					-- đóng cur_luong
