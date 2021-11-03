@@ -343,7 +343,7 @@ VALUES
 	('BT'	, 'title Bootstrap'	, 17	, 45	, 13	, '2021-10-11'),
 	('AG'	, 'Angular'			, 18	, 120	, 15	, '2019-10-15'),
 	('JN'	, 'Json'			, 19	, 120	, 15	, '2021-10-31'),
-	('AJ'	, 'Ajax'			, 20	, 120	, 15	, '2021-10-30');
+	('AJ'	, 'Ajax'			, 20	, 120	, 15	, '2021-11-01');
     
 -- Table 11: ExamQuestion
 --  ExamID: định danh của đề thi

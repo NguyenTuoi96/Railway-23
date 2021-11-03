@@ -155,12 +155,13 @@ CREATE TRIGGER trigger_check_answer
 		AND is_correct = 1;
         
         -- nếu question_id nhập vào đã có 4 câu trả lời hoặc question_id đó đã có 2 đáp án đúng thì show lỗi
-        IF cntAnswer >= 4 OR (cntAnswer < 4 AND cntTrueCorrect >= 2 AND NEW.is_correct = 1) THEN
+        IF cntAnswer >= 4 OR (cntTrueCorrect >= 2 AND NEW.is_correct = 1) THEN
 			SIGNAL SQLSTATE '12345'
-            SET MESSAGE_TEXT = 'câu hỏi không được quá 4 answers và 2 đáp án đúng1';
+            SET MESSAGE_TEXT = 'câu hỏi không được quá 4 answers và 2 đáp án đúng';
         END IF;       
 	END $$
 DELIMITER ;
+SELECT * from answer;
 INSERT INTO answer(content, question_id, is_correct) 
 VALUES 
 	('content answer test 1'	, 3		, 0);
@@ -176,18 +177,22 @@ CREATE TRIGGER trigger_check_gender
     BEGIN
 		IF NEW.gender = 'nam' then
 			SET NEW.gender = 'M';
-		ELSEIF NEW.gender = 'nữ' then
+		END IF;
+		IF NEW.gender = 'nữ' then
 			SET NEW.gender = 'F';
-		ELSEIF NEW.gender = 'chưa xác định' then
+		END IF;
+		IF NEW.gender = 'chưa xác định' then
 			SET NEW.gender = 'U';
         END IF;
     END $$
 DELIMITER ;
 INSERT INTO `account`(email, username, fullname, gender, department_id, position_id, create_date) 
 VALUES 
-	('hongphuc@gmail.com', 'phamphongphuc', 'Phạm Hồng Phúc', 'nam', 3, 2, '2021-10-18');
+	('hongphuc1@gmail.com', 'phamphongphuc1', 'Phạm Hồng Phúc', 'nam', 3, 2, '2021-10-18');
+select * from `account`;
 
 -- Question 9: Viết trigger không cho phép người dùng xóa bài thi mới tạo được 2 ngày
+-- Nghĩa là ngày 1 ngày 2 không xóa được
 DROP TRIGGER IF EXISTS trigger_check_delete_exam;
 DELIMITER $$
 CREATE TRIGGER trigger_check_delete_exam
@@ -196,14 +201,14 @@ CREATE TRIGGER trigger_check_delete_exam
 	BEGIN
 		DECLARE beforeTwoDay DATE; -- biến chứa 2 ngày trước
         SELECT DATE_SUB(CURDATE(), INTERVAL 2 DAY) INTO beforeTwoDay;
-        IF OLD.create_date >= beforeTwoDay THEN
+        IF OLD.create_date > beforeTwoDay THEN
 			SIGNAL SQLSTATE '12345'
             SET MESSAGE_TEXT = 'không được phép xóa bài thi mới tạo được 2 ngày';
         END IF;        
 	END $$
 DELIMITER ;
 select * from exam;
-DELETE FROM exam WHERE exam_id = 17;
+DELETE FROM exam WHERE exam_id = 18;
 
 -- Question 10: Viết trigger chỉ cho phép người dùng chỉ được update, delete các
 -- question khi question đó chưa nằm trong exam nào
@@ -277,16 +282,24 @@ SELECT g.group_id
 		WHEN 5 < COUNT(ga.account_id) AND COUNT(ga.account_id) <= 20 THEN 'normal' 
         WHEN COUNT(ga.account_id) > 20 THEN 'higher' 
 	END the_number_user_amount
+    , IF(5 < COUNT(ga.account_id) AND COUNT(ga.account_id) <= 20, 0, 1)
 FROM `group` g
 LEFT JOIN group_account ga ON g.group_id = ga.group_id
 GROUP BY g.group_id;
 
 -- Question 14: Thống kê số mỗi phòng ban có bao nhiêu user, nếu phòng ban nào
 -- không có user thì sẽ thay đổi giá trị 0 thành "Không có User"
-SELECT d.department_id
+use testing_system;
+SELECT d.department_name
 	, CASE WHEN COUNT(a.account_id) = 0 THEN 'Không có User' 
 		ELSE  COUNT(a.account_id)
 	END 'số user của phòng ban'
+FROM department d
+LEFT JOIN `account` a ON d.department_id = a.department_id
+GROUP BY d.department_id;
+
+SELECT d.department_name
+	, IF((COUNT(a.account_id) = 0), 'Không có User', COUNT(a.account_id)) 'số user của phòng ban'
 FROM department d
 LEFT JOIN `account` a ON d.department_id = a.department_id
 GROUP BY d.department_id
