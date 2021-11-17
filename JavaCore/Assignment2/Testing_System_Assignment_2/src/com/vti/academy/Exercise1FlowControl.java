@@ -119,6 +119,9 @@ public class Exercise1FlowControl {
 		groupAccount3.account = account3;
 		groupAccount3.JoinDate = new Date();
 
+
+		Department[] departmentArr = new Department[] { department1, department2, department3 };
+		Account[] accArr = new Account[] { account1, account2, account3, account4 };
 //		IF
 //		Question 1:
 		System.out.println("Question 1");
@@ -158,13 +161,11 @@ public class Exercise1FlowControl {
 
 //		FOREACH
 //		Question 8
-		Account[] accArr = new Account[] { account1, account2, account3, account4 };
 		System.out.println("Question 8");
 		question8(accArr);
 		System.out.println();
 
 //		Question 9
-		Department[] departmentArr = new Department[] { department1, department2, department3 };
 		System.out.println("Question 9");
 		question9(departmentArr);
 		System.out.println();
@@ -193,6 +194,16 @@ public class Exercise1FlowControl {
 //		Question 15
 		System.out.println("Question 15");
 		question15();
+
+//		WHILE
+//		Question 16
+		System.out.println("Question 16");
+		question16(accArr, departmentArr);
+		
+//		DO-WHILE
+//		Question 17
+		System.out.println("Question 17");
+		question17(accArr, departmentArr);
 	}
 
 	/**
@@ -462,7 +473,7 @@ public class Exercise1FlowControl {
 		// khởi tạo giá trị in
 		String printValue = "";
 		for (int i = 0; i < accArr.length; i++) {
-			// account thứ 2 thì không in (i = 1 -> account thứ 2)
+			// account có id >= 4 thì không in
 			if(accArr[i].accountId >= 4) {
 				continue;
 			}
@@ -506,5 +517,275 @@ public class Exercise1FlowControl {
 //				System.out.println("Số chẵn (dương) nhỏ hơn hoặc bằng 20 là: " + i);
 //			}
 //		}
+	}
+	
+	/**
+	 * Quesstion 16 
+	 * Làm lại các Question ở phần FOR bằng cách sử dụng WHILE kết hợp với lệnh break, continue
+	 * 
+	 * @param accArr các account
+	 * @param departmentArr các phòng ban
+	 */
+	public static void question16(Account[] accArr, Department[] departmentArr) {
+		// Question 10
+		System.out.println("Question 16 - Question 10");
+		int i = 0;
+		while (i < accArr.length) {
+			System.out.println("\tThông tin account thứ " + (i + 1) + " là:" + "\n\tEmail: " + accArr[i].email
+					+ "\n\tFull name: " + accArr[i].fullName + "\n\tPhòng ban: " + accArr[i].department.departmentName + "\n");
+			i++;
+		}
+
+		// Question 11
+		System.out.println("Question 16 - Question 11");
+		i = 0;
+		while (i < departmentArr.length) {
+			System.out.println("\tThông tin department thứ " + (i + 1) + " là:" + "\n\t\tId: " + departmentArr[i].departmentId
+					+ "\n\t\tName: " + departmentArr[i].departmentName + "\n");
+			i++;
+		}
+
+		// Question 12
+		System.out.println("Question 16 - Question 12");
+		i = 0;
+		while (i < 2) {
+			System.out.println("\tThông tin department thứ " + (i + 1) + " là:" + "\n\tId: " + departmentArr[i].departmentId
+					+ "\n\tName: " + departmentArr[i].departmentName + "\n");
+			i++;
+		}
+		
+		// Question 13
+		System.out.println("Question 16 - Question 13");
+		System.out.println("Thông tin account ngoại trừ account thứ 2: ");
+		// khởi tạo giá trị in
+		String printValue = "";
+		i = 0;
+		while (i < accArr.length) {
+			// account thứ 2 thì không in (i = 1 -> account thứ 2)
+			if(i == 1) {
+				i++;
+				continue;
+			}
+			// In các thông tin của account
+			printValue = "accountId: " + accArr[i].accountId
+					+ "\nEmail: " + accArr[i].email + "\nUserName: " + accArr[i].userName
+					+ "\nFullName: " + accArr[i].fullName + "\nDepartment: " + accArr[i].department.departmentName
+					+ "\nPosition: " + accArr[i].position.positionName + "\nCreateDate: " + dateFormat.format(accArr[i].createDate);
+			int cntGroups = accArr[i].groups != null ? accArr[i].groups.length : 0;
+			if(cntGroups > 0) {
+				// Khi account tham gia vào các group thì lặp mảng group và in các tên group mà account đó tham gia ra
+				printValue += "\nCác group tham gia: ";
+				int j = 0;
+				while(j < accArr[i].groups.length) {
+					if(j == 0) {
+						printValue += accArr[i].groups[j].groupName;
+					}else {
+						printValue += ", " + accArr[i].groups[j].groupName;
+					}
+					j++;
+				}
+				printValue += "\n";
+			}else {
+				// Nếu không có group nào thì in là không có
+				printValue += "\nCác group tham gia: không có\n";
+			}
+			System.out.println(printValue);
+			i++;
+		}
+		
+		// Question 14
+		System.out.println("Question 16 - Question 14");
+		System.out.println("Thông tin tất cả các account có id < 4 là : ");
+		// khởi tạo giá trị in
+		String printValue1 = "";
+		i = 0;
+		while ( i < accArr.length) {
+			// account có id >= 4 thì không in
+			if(accArr[i].accountId >= 4) {
+				i++;
+				continue;
+			}
+			// In các thông tin của account
+			printValue1 ="accountId: " + accArr[i].accountId
+					+ "\nEmail: " + accArr[i].email + "\nUserName: " + accArr[i].userName
+					+ "\nFullName: " + accArr[i].fullName + "\nDepartment: " + accArr[i].department.departmentName
+					+ "\nPosition: " + accArr[i].position.positionName + "\nCreateDate: " + dateFormat.format(accArr[i].createDate);
+			int cntGroups = accArr[i].groups != null ? accArr[i].groups.length : 0;
+			if(cntGroups > 0) {
+				// Khi account tham gia vào các group thì lặp mảng group và in các tên group mà account đó tham gia ra
+				printValue1 += "\nCác group tham gia: ";
+				int j = 0;
+				while (j < accArr[i].groups.length) {
+					if(j == 0) {
+						printValue1 += accArr[i].groups[j].groupName;
+					}else {
+						printValue1 += ", " + accArr[i].groups[j].groupName;
+					}
+					j++;
+				}
+				printValue1 += "\n";
+			}else {
+				// Nếu không có group nào thì in là không có
+				printValue1 += "\nCác group tham gia: không có\n";
+			}
+			System.out.println(printValue1);
+			i++;
+		}
+		
+		// Question 15
+		System.out.println("Question 16 - Question 15");
+		i = 0;
+		while(i <= 20) {
+			if(i % 2 == 0) {
+				System.out.println("Số chẵn (dương) nhỏ hơn hoặc bằng 20 là: " + i);
+			}
+			i++;
+		}
+	}
+	
+	/**
+	 * Quesstion 17 
+	 * Làm lại các Question ở phần FOR bằng cách sử dụng DO-WHILE kết hợp với lệnh break, continue
+	 * 
+	 * @param accArr các account
+	 * @param departmentArr các phòng ban
+	 */
+	public static void question17(Account[] accArr, Department[] departmentArr) {
+		// Question 10
+		System.out.println("Question 17 - Question 10");
+		int i = 0;
+		if(accArr.length > 0) {
+			do {
+				System.out.println("\tThông tin account thứ " + (i + 1) + " là:" + "\n\tEmail: " + accArr[i].email
+						+ "\n\tFull name: " + accArr[i].fullName + "\n\tPhòng ban: " + accArr[i].department.departmentName + "\n");
+				i++;
+			} while (i < accArr.length);
+		}else {
+			System.out.println("Không có account nào");
+		}
+
+		// Question 11
+		System.out.println("Question 17 - Question 11");
+		i = 0;
+		if(departmentArr.length > 0) {
+			do {
+				System.out.println("\tThông tin department thứ " + (i + 1) + " là:" + "\n\t\tId: " + departmentArr[i].departmentId
+						+ "\n\t\tName: " + departmentArr[i].departmentName + "\n");
+				i++;
+			} while (i < departmentArr.length);
+		} else {
+			System.out.println("Không có phòng ban nào");
+		}
+
+		// Question 12
+		System.out.println("Question 17 - Question 12");
+		i = 0;
+		if(departmentArr.length > 0) {
+			do {
+				System.out.println("\tThông tin department thứ " + (i + 1) + " là:" + "\n\tId: " + departmentArr[i].departmentId
+						+ "\n\tName: " + departmentArr[i].departmentName + "\n");
+				i++;
+			} while (i < 2);
+		} else {
+			System.out.println("Không có phòng ban nào");
+		}
+		
+		// Question 13
+		System.out.println("Question 17 - Question 13");
+		System.out.println("Thông tin account ngoại trừ account thứ 2: ");
+		// khởi tạo giá trị in
+		String printValue = "";
+		i = 0;
+		if(accArr.length > 0) {
+			do {
+				// account thứ 2 thì không in (i = 1 -> account thứ 2)
+				if(i == 1) {
+					i++;
+					continue;
+				}
+				// In các thông tin của account
+				printValue = "accountId: " + accArr[i].accountId
+						+ "\nEmail: " + accArr[i].email + "\nUserName: " + accArr[i].userName
+						+ "\nFullName: " + accArr[i].fullName + "\nDepartment: " + accArr[i].department.departmentName
+						+ "\nPosition: " + accArr[i].position.positionName + "\nCreateDate: " + dateFormat.format(accArr[i].createDate);
+				int cntGroups = accArr[i].groups != null ? accArr[i].groups.length : 0;
+				if(cntGroups > 0) {
+					// Khi account tham gia vào các group thì lặp mảng group và in các tên group mà account đó tham gia ra
+					printValue += "\nCác group tham gia: ";
+					int j = 0;
+					do {
+						if(j == 0) {
+							printValue += accArr[i].groups[j].groupName;
+						}else {
+							printValue += ", " + accArr[i].groups[j].groupName;
+						}
+						j++;
+					} while(j < accArr[i].groups.length);
+					printValue += "\n";
+				}else {
+					// Nếu không có group nào thì in là không có
+					printValue += "\nCác group tham gia: không có\n";
+				}
+				System.out.println(printValue);
+				i++;
+			} while (i < accArr.length);
+		}else {
+			System.out.println("Không có account nào");
+		}
+		
+		
+		// Question 14
+		System.out.println("Question 17 - Question 14");
+		System.out.println("Thông tin tất cả các account có id < 4 là : ");
+		// khởi tạo giá trị in
+		String printValue1 = "";
+		i = 0;
+		if(accArr.length > 0) {
+			do {
+				// account có id >= 4 thì không in
+				if(accArr[i].accountId >= 4) {
+					i++;
+					continue;
+				}
+				// In các thông tin của account
+				printValue1 ="accountId: " + accArr[i].accountId
+						+ "\nEmail: " + accArr[i].email + "\nUserName: " + accArr[i].userName
+						+ "\nFullName: " + accArr[i].fullName + "\nDepartment: " + accArr[i].department.departmentName
+						+ "\nPosition: " + accArr[i].position.positionName + "\nCreateDate: " + dateFormat.format(accArr[i].createDate);
+				int cntGroups = accArr[i].groups != null ? accArr[i].groups.length : 0;
+				if(cntGroups > 0) {
+					// Khi account tham gia vào các group thì lặp mảng group và in các tên group mà account đó tham gia ra
+					printValue1 += "\nCác group tham gia: ";
+					int j = 0;
+					while (j < accArr[i].groups.length) {
+						if(j == 0) {
+							printValue1 += accArr[i].groups[j].groupName;
+						}else {
+							printValue1 += ", " + accArr[i].groups[j].groupName;
+						}
+						j++;
+					}
+					printValue1 += "\n";
+				}else {
+					// Nếu không có group nào thì in là không có
+					printValue1 += "\nCác group tham gia: không có\n";
+				}
+				System.out.println(printValue1);
+				i++;
+			} while ( i < accArr.length);
+		} else {
+			System.out.println("Không có account nào");
+		}
+		
+		
+		// Question 15
+		System.out.println("Question 16 - Question 15");
+		i = 0;
+		do {
+			if(i % 2 == 0) {
+				System.out.println("Số chẵn (dương) nhỏ hơn hoặc bằng 20 là: " + i);
+			}
+			i++;
+		} while(i <= 20);
 	}
 }
