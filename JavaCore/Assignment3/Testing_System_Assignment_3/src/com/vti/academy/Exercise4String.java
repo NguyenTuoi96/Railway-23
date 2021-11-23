@@ -22,8 +22,8 @@ public class Exercise4String {
 		group3.groupId = 3;
 		group3.groupName = "Java";
 		group3.createDate = new Date();
-		
-		Group[] groupArr = new Group[] {group1, group2, group3};
+
+		Group[] groupArr = new Group[] { group1, group2, group3 };
 
 //		// Question 1
 //		question1();
@@ -57,9 +57,37 @@ public class Exercise4String {
 //		question8(groupArr);
 //		System.out.println();
 
-		// Question 9
-		question9(groupArr);
-		System.out.println();
+//		// Question 9
+//		question9(groupArr);
+//		System.out.println();
+
+//		// Question 10
+//		question10("word", "drow");
+//		System.out.println();
+
+//		// Question 11
+//		question11("kiểm tra số lần xuất hiện kí tự a");
+//		System.out.println();
+
+//		// Question 12
+//		question12("kiểm tra");
+//		System.out.println();
+
+//		// Question 13
+//		question13("kiểm tra");
+//		System.out.println();
+
+//		// Question 14
+//		question14("VTI Academy e", "e", "*");
+//		System.out.println();
+
+//		// Question 15
+//		question15("    I am developer     ");
+//		System.out.println();
+
+//		// Question 16
+//		question16("Cho một chuỗi str và số nguyên n ", 4);
+//		System.out.println();
 
 	}
 
@@ -224,8 +252,8 @@ public class Exercise4String {
 	 */
 	private static void question8(Group[] groupArr) {
 		System.out.println("Question 8");
-		for(Group group : groupArr) {
-			if(group.groupName.matches("(.*)Java(.*)")) {
+		for (Group group : groupArr) {
+			if (group.groupName.matches("(.*)Java(.*)")) {
 				System.out.println("group có chứa chữ \"Java\": " + group.groupName);
 			}
 		}
@@ -236,10 +264,129 @@ public class Exercise4String {
 	 */
 	private static void question9(Group[] groupArr) {
 		System.out.println("Question 9");
-		for(Group group : groupArr) {
-			if(group.groupName.matches("Java")) {
+		for (Group group : groupArr) {
+			if (group.groupName.matches("Java")) {
 				System.out.println("group \"Java\": " + group.groupName);
 			}
+		}
+	}
+
+	/**
+	 * Question 10 (Optional): Kiểm tra 2 chuỗi có là đảo ngược của nhau hay không.
+	 * Nếu có xuất ra “OK” ngược lại “KO”. Ví dụ “word” và “drow” là 2 chuỗi đảo
+	 * ngược nhau.
+	 */
+	private static void question10(String str1, String str2) {
+		System.out.println("Question 10");
+		StringBuilder stringBuild = new StringBuilder(str1);
+		String strCompare = stringBuild.reverse().toString();
+
+		if (str2.equals(strCompare)) {
+			System.out.println("OK");
+		} else {
+			System.out.println("KO");
+		}
+	}
+
+	/**
+	 * Question 11 (Optional): Count special Character Tìm số lần xuất hiện ký tự
+	 * "a" trong chuỗi
+	 * 
+	 * @param strInput Chuỗi nhập vào
+	 */
+	private static void question11(String strInput) {
+		System.out.println("Question 11");
+		String[] strArr = strInput.split("");
+		int cntChar = 0;
+		for (String str : strArr) {
+			if (str.equals("a")) {
+				cntChar++;
+			}
+		}
+		System.out.println("số lần xuất hiện của kí tự \"a\" trong chuỗi là: " + cntChar);
+	}
+
+	/**
+	 * Question 12 (Optional): Reverse String Đảo ngược chuỗi sử dụng vòng lặp
+	 */
+	private static void question12(String strInput) {
+		System.out.println("Question 12");
+		String[] strArr = strInput.split("");
+		String strResult = "";
+		for (int i = strArr.length - 1; i >= 0; i--) {
+			strResult += strArr[i];
+		}
+		System.out.printf("Chuỗi gốc và chuỗi đảo ngược là: '%s' và '%s'%n", strInput, strResult);
+	}
+
+	/**
+	 * Question 13 (Optional): String not contains digit Kiểm tra một chuỗi có chứa
+	 * chữ số hay không, nếu có in ra false ngược lại true.
+	 */
+	private static void question13(String strInput) {
+		if(strInput == null) {
+			System.out.println(false);
+			return;
+		}
+		System.out.println("Question 13");
+		String[] strArr = strInput.split("");
+		boolean result = true;
+		for (String str : strArr) {
+			if (str.matches(".*\\d.*")) {
+				result = false;
+				break;
+			}
+		}
+		System.out.println(result);
+	}
+
+	/**
+	 * Question 14 (Optional): Replace character Cho một chuỗi str, chuyển các ký tự
+	 * được chỉ định sang một ký tự khác cho trước. Ví dụ: "VTI Academy" chuyển ký
+	 * tự 'e' sang '*' kết quả " VTI Acad*my"
+	 */
+	private static void question14(String strInput, String strDesignate, String strReplace) {
+		System.out.println("Question 14");
+		String result = strInput.replace(strDesignate, strReplace);
+		System.out.println(result);
+	}
+
+	/**
+	 * Question 15 (Optional): Revert string by word Đảo ngược các ký tự của chuỗi
+	 * cách nhau bởi dấu cách mà không dùng thư viện. Ví dụ: " I am developer " =>
+	 * "developer am I". Các ký tự bên trong chỉ cách nhau đúng một dấu khoảng cách.
+	 * Gợi ý: Các bạn cần loại bỏ dấu cách ở đầu và cuối câu, thao tác cắt chuỗi
+	 * theo dấu cách
+	 */
+	private static void question15(String strInput) {
+		System.out.println("Question 15");
+		String[] strArr = strInput.trim().split(" ");
+		String strResult = "";
+		for (int i = strArr.length - 1; i >= 0; i--) {
+			strResult += strArr[i] + " ";
+		}
+		System.out.printf("Chuỗi gốc và chuỗi đảo ngược là: '%s' và '%s'%n", strInput, strResult.trim());
+	}
+
+	/**
+	 * Question 16 (Optional):Cho một chuỗi str và số nguyên n >= 0. Chia chuỗi str
+	 * ra làm các phần bằng nhau với n ký tự. Nếu chuỗi không chia được thì xuất ra
+	 * màn hình “KO”.
+	 */
+	private static void question16(String strInput, int n) {
+		System.out.println("Question 16");
+		String[] strArr = strInput.split("");
+		if (strArr.length % n != 0) {
+			System.out.printf("KO");
+		} else {
+			String strResult = "Chuỗi sau khi tách là: '";
+			for (int i = 0; i < strArr.length; i++) {
+				strResult += strArr[i];
+				if ((i + 1) % n == 0 && i > 0) {
+					strResult += "', '";
+				}
+			}
+			System.out.println("Chuỗi sau khi tách: " + strResult.substring(0, strResult.length() - 3));
 		}
 	}
 
