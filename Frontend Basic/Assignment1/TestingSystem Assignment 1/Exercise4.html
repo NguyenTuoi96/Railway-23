@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Exercise 4 Demo Project</title>
+    <style>
+        div {
+            font-family: sans-serif;
+        }
+
+        .toolbar-items {
+            display: inline;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin-left: 20px;
+        }
+
+        .toolbar-items a {
+            font-family: sans-serif;
+            line-height: 25px;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .toolbar-items:before {
+            content: "★ ";
+            color: rgb(255, 102, 0);
+        }
+
+        #search {
+            margin-top: 0px;
+            background-color: #1f1f1f;
+            border: none;
+            border-left: 1px solid rgba(225, 225, 225, 0.1);
+            font-size: 9px;
+            width: 150px;
+            height: 23px;
+            color: white;
+        }
+
+        .logo {
+            margin-left: 450px;
+            background: url(https://kenh14cdn.com/web_images/sprite-k14.20.png);
+            background-repeat: no-repeat;
+            background-position: 0 0;
+            width: 157px;
+            height: 60px;
+            position: absolute;
+            top: 33px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .header-items {
+            display: inline;
+            margin-left: 20px;
+            border: 1px white solid;
+            padding: 3px 10px;
+            font-size: 12px;
+            border-radius: 90px;
+        }
+
+        .header {
+            position: absolute;
+            left: 650px;
+            top: 30px;
+        }
+
+        .header:before {
+            background-image: url(https://kenh14cdn.com/web_images/sprite-k14.20.png);
+            background-repeat: no-repeat;
+            background-position: -388px -55px;
+            display: block;
+            width: 19px;
+            height: 12px;
+            position: absolute;
+            top: 20px;
+            left: 35px;
+            content: '';
+        }
+
+        .menu {
+            height: 40px;
+            background-color: #a70e1a;
+        }
+
+        .menu-items {
+            display: inline;
+            margin-left: 15px;
+        }
+
+        .menu-items a {
+            color: white;
+            font-family: sans-serif;
+            font-size: 13px;
+            line-height: 40px;
+        }
+
+        .body-menu-item {
+            display: inline;
+            margin-left: 20px;
+            font-family: sans-serif;
+            font-size: 14px;
+            color: black;
+        }
+
+        .body-menu-item a {
+            color: black;
+            font-weight: bold;
+            height: 50px;
+        }
+
+        .body-menu-item a:hover {
+            border-bottom: 4px #c81926 solid;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        #comment-box {
+            background-color: #94a2af;
+            position: relative;
+            padding: 5px 10px 5px 10px;
+            color: white;
+            height: 35px;
+            width: 40px;
+            border-radius: 4px;
+        }
+
+        #comment-box::after {
+            content: "";
+            position: absolute;
+            height: 25px;
+            width: 17px;
+            bottom: -12px;
+            left: 20%;
+            background-color: #94a2af;
+            clip-path: polygon(100% 50%, 80% 50%, 0% 100%, 0 50%);
+        }
+
+        .link-header {
+            font-size: 13px;
+            line-height: 16px;
+            color: rgb(255, 115, 0);
+            margin-bottom: 5px;
+        }
+
+        .link-header a {
+            color: rgb(34, 33, 33);
+        }
+
+        .button-link {
+            border-radius: 5px;
+            background-color: #ebebeb;
+            padding: 8px 8px 8px 8px;
+            text-decoration: none;
+            color: #555;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .button-link:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        .same-new:before {
+            width: 5px;
+            height: 18px;
+            position: absolute;
+            content: " ";
+            background-color: #fb6c27;
+            margin-top: 33px;
+        }
+
+        .same-new table tr td select {
+            border: #ccc 1px solid;
+            border-radius: 2px;
+        }
+
+        .same-new table tr td {
+            padding-left: 10px;
+        }
+
+        .same-new-link table tr td a {
+            color: black;
+        }
+
+        .same-new-link table tr td img {
+            height: 180px;
+            width: 227px;
+        }
+
+        .same-new-link table tr td {
+            padding-right: 10px;
+            padding-bottom: 50px;
+        }
+    </style>
+</head>
+
+<body style="margin: 0px;">
+    <form action="action_page.html">
+        <div style="background-color: #1f1f1f; height: 25px;">
+            <div style="width: 1120px; margin: auto;">
+                <ul style="margin: 0px; float: left;">
+                    <li class="toolbar-items"><a href="https://kenh14.vn/sport/vong-loai-world-cup.chn"
+                            target="_blank">ĐỘI TUYỂN VIỆT NAM</a></li>
+                    <li class="toolbar-items"><a href="https://kenh14.vn/hello-genz.html" target="_blank">HELLO GENZ</a>
+                    </li>
+                    <li class="toolbar-items"><a href="https://kenh14.vn/nhom-chu-de/emagazine.chn"
+                            target="_blank">EMAGAZINE</a></li>
+                </ul>
+                <a href="#"
+                    style="float: right; margin-top: 4px; color: white; border-right: 1px solid rgba(225, 225, 225, 0.1); padding-right: 10px">
+                    <i class="fa fa-search"></i>
+                </a>
+                <input type="text" id="search" style="float: right;" placeholder="Tìm kiếm...">
+            </div>
+        </div>
+        <div style="background-color: #f0a52b; height: 70px;">
+            <div style="width: 1120px; margin: auto; float: left;">
+                <a href="#" class="logo"></a>
+                <div class="header">
+                    <ul>
+                        <li class="header-items"><a href="#" style="color: white;">#Học sinh chuẩn bị đi học lại</a>
+                        </li>
+                        <li class="header-items"><a href="#" style="color: white;">#Bi hài chuyện học online</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="menu">
+            <div style="margin:0 auto; width: 1120px;">
+                <ul style="margin-top: 0px;">
+                    <li class="menu-items"><a href="#"><img src="img/home.jpg" style="margin-bottom: -4px;"
+                                alt="home"></a>
+                    </li>
+                    <li class="menu-items" style="margin-left: 0px;"><a href="#">Star</a></li>
+                    <li class="menu-items"><a href="#">TV Show</a></li>
+                    <li class="menu-items"><a href="#">Cine</a></li>
+                    <li class="menu-items"><a href="#">Musik</a></li>
+                    <li class="menu-items"><a href="#">Beauty & Fashion</a></li>
+                    <li class="menu-items"><a href="#">Xem mua luôn</a></li>
+                    <li class="menu-items"><a href="#">Đời sống</a></li>
+                    <li class="menu-items"><a href="#">Ăn - Quẩy - đi</a></li>
+                    <li class="menu-items"><a href="#">Xã hội</a></li>
+                    <li class="menu-items"><a href="#">Thế giới</a></li>
+                    <li class="menu-items"><a href="#">Sport</a></li>
+                    <li class="menu-items"><a href="#">Học đường</a></li>
+                    <li class="menu-items"><a href="#">Video</a></li>
+                    <li class="menu-items"><a href="#">...</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="body" style="background-color: #f1f1f1; height: 100px; margin-top:0px;">
+        </div>
+        <div class="body" style="background-color: #f1f1f1; margin-top:0px;">
+            <div style="background-color: white; width: 1120px; margin: auto; border: 1px solid #e7e8ea;">
+                <div style="width: 1040px; margin: auto; border-bottom: 1px solid #e7e8ea;">
+                    <div style="width: 1040px; margin: 0 auto; margin-bottom: 20px;">
+                        <ul style="padding-inline-start: 0px;">
+                            <li class="body-menu-item" style="margin-left: 0px;"><a href="#">HỌC ĐƯỜNG</a></li>
+                            <li class="body-menu-item"><a href="#">TUYỂN SINH</a></li>
+                            <li class="body-menu-item"><a href="#">NGƯỜI VIỆT TRẺ</a></li>
+                            <li class="body-menu-item"><a href="#">DU HỌC</a></li>
+                            <li class="body-menu-item"><a href="#">BẢN TIN 46'</a></li>
+                            <li class="body-menu-item" style="float: right;"><a href="#">SỨC KHỎE</a></li>
+                            <li class="body-menu-item" style="float: right;"><a href="#">KHÁM PHÁ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="width: 1040px; margin: 0 auto; height: 100%;">
+                    <div style="width: 710px; border-bottom: #e7e8ea 1px dotted; padding-bottom: 15px;">
+                        <div>
+                            <h1 style="line-height: 36px;">Nộp CV thành tích quá khủng, cô gái bị thất <br>nghiệp không
+                                hiểu lý do</h1>
+                        </div>
+
+                        <div style="font-weight: bold; height: 15px;">
+                            <small style="color: rgb(255, 115, 0);">VÂN TRANG,</small>
+                            <small style="color: #777;"> THEO </small>
+                            <small><a href="#" style="color: #41455e;">TRÍ THỨC TRẺ</a></small>
+                            <small style="color: #777;"> &nbsp; &nbsp; &nbsp; &nbsp; <img src="img/dongho.jpg"
+                                    style="margin-bottom: -4px;" alt="home"> 19:06 02/06/2020 </small>
+                        </div>
+
+                        <div style="height: 24px; margin-top: 15px;">
+                            <button
+                                style="height: 18px; background-color:#4267b2; border: #4267b2 1px solid; color: white; width: 100px; border-radius: 2px;"><i
+                                    class="fa fa-thumbs-up"></i>&nbsp; Thích 93</button>
+                            <button
+                                style="height: 18px; background-color:#4267b2; border: #4267b2 1px solid; color: white; width: 70px; border-radius: 2px;">Chia
+                                sẻ</button>
+                            <button
+                                style="height: 18px; background-color:white; border: #e7e8ea 1px solid; color: #4267b2; width: 180px; border-radius: 2px;"><i
+                                    class="fa fa-bookmark"></i>&nbsp; &nbsp;Lưu vào Facebook</button>
+                            <button
+                                style="height: 19px; background-color:rgb(22, 22, 22); border: rgb(22, 22, 22) 1px solid; color: #f1f1f1; width: 30px; border-radius: 2px;"><i
+                                    class="fa fa-envelope"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 1040px; margin: 0 auto;">
+                    <div style="width: 710px; margin-top: 20px;">
+                        <div style="width: 60px; position: absolute">
+                            <div id="comment-box" style="cursor: pointer;">BÌNH<br>LUẬN</div>
+                            <div style="margin-top: 20px; margin-left: 10px;"><button
+                                    style="font-size:24px; height: 40px; width: 40px; border-radius: 90%; border: orange 1px solid; background-color: orange">
+                                    <i class="material-icons" style="color: white;">home</i></button></div>
+                            <div style="margin-top: 20px; margin-left: 10px;"><button
+                                    style="font-size:24px; height: 40px; width: 40px; border-radius: 90%; border: #386bd1 1px solid; background-color: #386bd1">
+                                    <span style="color: white;">f</span></button></div>
+                        </div>
+                        <div style="width: 610px; margin-left: 100px; border-bottom: #e7e8ea 1px solid;">
+                            <div>
+                                <h2 style="font-size: 17px; line-height: 22px;">Đi làm rồi mới thấy muôn kiểu lý do từ
+                                    chối ứng viên. Năng lực kém chắc chắn không được nhưng người giỏi quá đôi khi cũng
+                                    không nhận vào làm nốt.</h2>
+                            </div>
+                            <div>
+                                <ul style="padding-inline-start: 15px;">
+                                    <li class="link-header"><a href="#">Đem CV ứng viên ra trêu đùa, nhà tuyển dụng nhận
+                                            trái đắng </a></li>
+                                    <li class="link-header"><a href="#">Ứng viên chửi bới, nhà tuyển dụng bị dân tình
+                                            soi ra lỗi kinh điển rất dễ mắc: Người trong cuộc đưa ra lời giải thích </a>
+                                    </li>
+                                    <li class="link-header"><a href="#">Nữ sinh tức tối bị nhà tuyển dụng lật kèo hủy
+                                            lịch phút chót, dân mạng soi ra chi tiết bất thường mà công ty nào cũng hay
+                                            xài </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 1040px; margin: 0 auto;">
+                    <div style="width: 710px; margin-top: 20px; border-bottom: #e7e8ea 1px solid;">
+                        <div style="width: 610px; margin-left: 100px;">
+                            <div
+                                style="color: #222; font-family: 'Times New Roman', Georgia, serif; font-size: 18px; line-height: 25px;">
+                                <p>Sinh viên tốt nghiệp là những ngươi đang đứng trước ngưỡng cửa thị trường lao động,
+                                    là thế hệ trẻ nhất, được kì vọng nhiều nhất bởi sự năng động, nhạy bén và sáng tạo.
+                                    Thế nhưng liệu họ có thể đáp ứng được những đòi hỏi của công việc trong môi trường
+                                    thực tế gấp rút, nhiều áp lực hay không lại là một vấn đề không thể kết luận được.
+                                </p>
+                                <p>Thực tế có rất nhiều nguyên nhân khiến người trẻ thất nghiệp. Có vô số lý do từ hiển
+                                    nhiên cho đến vô cùng khó hiểu như đòi hỏi quá cao, không chấp nhận mức lương thấp,
+                                    thích việc nhẹ nhàng, ngại đi xa, cộng thêm thiếu kỹ năng mềm, giao tiếp bằng tiếng
+                                    Anh kém... Tuy nhiên thất nghiệp vì quá giỏi như cô nàng dưới đây lại khá hiếm.</p>
+                                <div style="background-color: #f2f2f2; padding-bottom: 10px;">
+                                    <img src="img/thatnghiepgirl.jpg" alt="thatnghiep" width="610px">
+                                    <figcaption style="font-size: 14px; color: #666; margin-left: 10px;">Cô gái thất
+                                        nghiệp vì thành tích làm việc quá khủng. (Ảnh minh họa)</figcaption>
+                                </div>
+                                <p>Cụ thể, cô nàng V.P chia sẻ trê một group khá có tiếng chuyên tìm việc làm cho dân
+                                    văn phòng và sinh viên:</p>
+                                <p><i>"Mình hiện tại thất nghiệp được gần 3 tháng và hiện tại rất hoang mang. Mình tốt
+                                        ngiệp Đại học với tấm bằng loại giỏi và vừa ra trường đã đỗ vào một tập đoàn
+                                        nước ngoài khá có tiếng với vị trí Nhân viên Hành chính. Làm tầm được 2 năm,
+                                        mình lại chuyển sang một tập đoàn lớn ở Việt Nam vào vị trí Chuyên viên giám sát
+                                        vể mảng quản lý kho bãi, công việc này có thể giúp mình học hỏi và trau dồi thêm
+                                        nhiều kỹ năng mềm.</i></p>
+                                <p><i>Đang yên đang lành, tự dưng dịch đến làm công ty mình phải cho nhân viên nghỉ vì
+                                        thị trường chủ yếu là Mỹ. Mình nghỉ việc từ tháng 3, nhưng điều đáng nói là từ
+                                        đó đến nay, mình không thể xin được bất kỳ công ty nào nữa.</i></p>
+                                <p><i>Những công ty vừa và lớn ở chỗ mình vì đang dịch nên không tuyển dụng nhân sự.
+                                        Mình nộp vào công ty tư nhân, quy mô nhỏ nhưng đi phỏng vấn lại không đỗ, tất cả
+                                        đều đưa ra lý do bởi kinh nghiệm làm việc và kỹ năng của mình tạo cảm giác cho
+                                        họ suy nghĩ mình chỉ xin việc ở chỗ họ một thời gian tạm bợ và sẽ không gắn bó
+                                        lâu dài. Mặc dù mình đã ra sức thuyết phục rằng đang rất cần việc và sẽ sẵn sàng
+                                        gắn bó lâu dài nếu công ty có chế độ và phúc lợi tốt. Tuy nhiên, tất cả đều bặt
+                                        vô âm tín.</i></p>
+                                <p><i>Đã ba tháng trôi qua và nếu tình hình cứ thế này thì thực sự mình sẽ bế tắc mắt.
+                                        Cơ hội việc làm cứ nhỏ giọt và không được như vậy. Sau gần 5 năm làm việc tại
+                                        các công ty lớn, lần đầu mình trải qua cảm giác lo lắng tột độ vì thất nghiệp.
+                                        Từ một người tự tin đi đâu cũng đỗ vậy mà cả công ty từ lớn đến bé đều chối bỏ
+                                        mình. Ngoài khả năng chuyên môn, mình còn khả năng viết lách, giờ muốn nhân dịp
+                                        này xuất bản sách nhưng cũng chẳng còn tâm trạng nữa".</i></p>
+                                <div style="background-color: #f2f2f2;padding-bottom: 10px;">
+                                    <img src="img/covidgirl.jpg" alt="covidgirl" width="610px">
+                                    <figcaption style="font-size: 14px; color: #666; margin-left: 10px;">Có thể thấy
+                                        Covid-19 đã ảnh hưởng rất nhiều đến thị trường lao động, khiến cho ứng viên dù
+                                        năng lực giỏi vẫn không được nhận làm việc. (Ảnh minh họa)</figcaption>
+                                </div>
+                                <p>Dòng tâm sự của cô gái này đã nhận về nhiều đồng cảm của cộng đồng mạng. Thực tế,
+                                    tình trạng thất nghiệp mùa dịch không hề hiếm khi hàng loạt công ty đã phải tuyên bố
+                                    phá sản. Nhiều người cũng ngậm ngùi chia sẻ chỉ nhận được 1/2 hay thậm chí 1/3 mức
+                                    lương cũ khi apply hậu mùa dịch.</p>
+                                <p><i>"Nếu mình là CEO 1 công ty nhỏ thì cũng không tuyển bạn thật bởi trình độ và năng
+                                        lực của bạn không hợp. Công ty nhỏ cũng có cái khó và mục tiêu riêng của nó.
+                                        Nhận bạn vào không khéo năng lực của bạn còn cao hơn cả sếp"</i>, bạn H.T bình
+                                    luận.</p>
+                                <p><i>"Bạn chỉ cần hạ mình, giấu đỡ kinh nghiệm thực tế thì không lo thất nghiệp. Quan
+                                        trọng là bạn có chấp nhận làm không thôi"</i>, bạn A.B chia sẻ.</p>
+                                <p><i>"Quan trọng là tư tưởng của bạn có chịu làm những công việc mà khởi đầu rất thấp
+                                        không. Như mình giờ chỉ xin đi làm công ty lương bằng nửa lương cũ cho sống qua
+                                        mấy ngày khó khăn này. Đừng tỏ ra quá tự tin hay tham vọng khi phỏng vấn, HR
+                                        thấy giỏi quá không cho vào làm đâu"</i>, bạn L.M chia sẻ.</p>
+                                <p>Đúng là khi đi làm mới thấy muôn kiểu không nhận ứng viên. Kém quá chắc chắn không
+                                    đươc nhưng giỏi quá cũng chưa chắc được nhận. Về phần cô nàng trong câu chuyện trên
+                                    thì tin mừng là sau khi bài viết đăng tải, một vài nơi đã liên hệ với V.P để phỏng
+                                    vấn. Hi vọng với năng lực sẵn có của mình, cô nàng sẽ đem lại lợi nhuận giúp khắc
+                                    phục tổn hại kinh tế cho công ty.</p>
+
+                                <div
+                                    style="margin-top: 80px; background-color: #f2f2f2; color: #888; width: 200px; border-radius: 90px; margin-left: 410px; line-height: 30px; padding: 0px 20px 0px 20px; font-size: 15px;">
+                                    <small style="font-weight: bold;">Theo</small> <small
+                                        style="color: #444; font-weight: bold;">Trí thức trẻ</small>
+                                    <small style="color: #333333; font-size: 11px; float: right; margin-left: 4px;">Copy
+                                        Link</small>
+                                    <i class="material-icons"
+                                        style="font-size: 11px; margin-top: 10px; float: right">content_paste</i>
+                                </div>
+
+                                <div style="padding-top: 10px; margin-bottom: 30px;">
+                                    <a href="#" style="color: #004370; font-size: 23px; line-height: 29px;">
+                                        >>Ứng viên hỏi JD bỗng không muốn trả lời, nhà tuyển dụng còn mắng xối xả "đồ vô
+                                        học": Lời giải thích khiến ai cũng giận tím người!
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="width: 1040px; margin: 0 auto;">
+                    <div
+                        style="width: 710px; margin-top: 12px; border-bottom: #e7e8ea 1px solid; padding-bottom: 15px;">
+                        <button
+                            style="height: 20px; border: #787a7e 1px solid; color: white; width: 70px; border-radius: 2px; background-image: url(img/linkhay.jpg); background-repeat: no-repeat; color: rgba(0, 0, 0, 0);">Linkhay</button>
+                        <button
+                            style="height: 20px; background-color:#4267b2; border: #4267b2 1px solid; color: white; width: 100px; border-radius: 2px; margin-left: 15px;"><i
+                                class="fa fa-thumbs-up"></i>&nbsp; Thích 93</button>
+                        <button
+                            style="height: 20px; background-color:#4267b2; border: #4267b2 1px solid; color: white; width: 70px; border-radius: 2px; margin-left: 5px;">Chia
+                            sẻ</button>
+                    </div>
+                </div>
+                <div style="width: 1040px; margin: 0 auto; margin-bottom: 60px;">
+                    <div style="width: 710px; margin-top: 25px; margin-bottom: 15px; ">
+                        <div style="margin-bottom: 8px; height: 30px;">
+                            <a class="button-link" href="#">#sinh viên tốt nghiệp</a>
+                            <a class="button-link" href="#">#thế hệ trẻ</a>
+                            <a class="button-link" href="#">#dân văn phòng</a>
+                            <a class="button-link" href="#">#nhân viên hành chính</a>
+                        </div>
+                        <div style="margin-bottom: 8px; height: 30px;">
+                            <a class="button-link" href="#">#kinh nghiệm làm việc</a>
+                            <a class="button-link" href="#">#cơ hội việc làm</a>
+                            <a class="button-link" href="#">#công ty lớn</a>
+                            <a class="button-link" href="#">#kinh nghiệm thực tế</a>
+                            <a class="button-link" href="#">#thất nghiệp</a>
+                        </div>
+                        <div style="margin-bottom: 8px; height: 30px;">
+                            <a class="button-link" href="#">#tuyển dụng</a>
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 1040px; margin: 0 auto;">
+                    <div style="width: 710px; background-image: url(split.jpg);height: 10px;">
+                    </div>
+                </div>
+                <div style="width: 1040px; margin: 0 auto; border-bottom: #e7e8ea 1px solid;">
+                    <div style="width: 710px;">
+                        <div class="same-new">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <p style="font-family: system-ui; color: black; font-size: 22px;"><b>TIN CÙNG
+                                                CHUYÊN MỤC</b></p>
+                                    </td>
+                                    <td style="margin-top: 10px;">
+                                        <p style="font-size: 15px; color: #555; padding-top: 4px;">Xem theo ngày</p>
+                                    </td>
+                                    <td>
+                                        <select name="days" id="days" style="height: 25px; width: 50px;">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="months" id="months" style="height: 25px; width: 80px;">
+                                            <option value="1">THÁNG 1</option>
+                                            <option value="2">THÁNG 2</option>
+                                            <option value="3">THÁNG 3</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="years" id="years" style="height: 25px; width: 60px;">
+                                            <option value="2022">2022</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2020">2020</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button
+                                            style="width: 81px; background-color: #777; color: #fff; border: none; height: 25px; border-radius: 2px;">
+                                            XEM
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="same-new-link">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <a href="#">
+                                            <img src="img/hoconline.JPG" alt="thatnghiep">
+                                            <figcaption style="font-size: 14px; ">Học online quên tắt mic suốt 36 giây,
+                                                nữ
+                                                sinh để lộ giọng nói lạ, không bị mắng còn được cả lớp khen tới tấp
+                                            </figcaption>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#">
+                                            <img src="img/olympia.JPG" alt="thatnghiep">
+                                            <figcaption style="font-size: 14px; ">Câu hỏi Olympia: "Có bao nhiêu số chia
+                                                hết cho 5..." - Câu hỏi khiến 4 thí sinh bó tay, thực tế lại siêu dễ ợt!
+                                            </figcaption>
+                                        </a>
+                                    </td>
+                                    <td style="padding-right: 0px;">
+                                        <a href="#">
+                                            <img src="img/phamnhatvuong.JPG" alt="thatnghiep">
+                                            <figcaption style="font-size: 14px; ">"Dùng nghèo để nuôi con trai", Chủ
+                                                tịch Vingroup Phạm Nhật Vượng: "Làm tốt, tôi sẽ tạo sân chơi hết sức.
+                                                Còn không được, vui lòng tránh ra để người khác làm!"
+                                            </figcaption>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#">
+                                            <img src="img/chieuhu.JPG" alt="thatnghiep">
+                                            <figcaption style="font-size: 14px; ">Nam sinh được chiều hư đến mức đánh cả
+                                                bố, gia đình phải đưa về quê sống, bất ngờ thay đổi ngoạn mục sau 8 năm
+                                                gây sửng sốt
+                                            </figcaption>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#">
+                                            <img src="img/onhat.JPG" alt="thatnghiep">
+                                            <figcaption style="font-size: 14px; ">Con gái ở Nhật bất ngờ về nhà ăn Tết
+                                                trong đêm, mẹ đang ngủ tỉnh dậy không nhận ra con, hành động sau đó xem
+                                                mà thương
+                                            </figcaption>
+                                        </a>
+                                    </td>
+                                    <td style="padding-right: 0px;">
+                                        <a href="#">
+                                            <img src="img/mannon.JPG" alt="thatnghiep">
+                                            <figcaption style="font-size: 14px; ">TP.HCM: Đề xuất trẻ mầm non đến lớp 6
+                                                đến trường học trực tiếp từ ngày 14/2
+                                            </figcaption>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

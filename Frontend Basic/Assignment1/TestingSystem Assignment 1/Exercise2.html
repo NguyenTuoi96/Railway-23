@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 2 Body HTML</title>
+    <style>
+        .required:after {
+            content: " *";
+            color: red;
+        }
+        .question {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="question1">
+        <h1 class="question">Question 1: heading</h1>
+        <h1 style="color: blue;">Đây là thẻ h1</h1>
+        <h2 style="color: blueviolet;">Đây là thẻ h2</h2>
+        <h3 style="color: cadetblue;">Đây là thẻ h3</h3>
+        <h4 style="color: chartreuse;">Đây là thẻ h4</h4>
+        <h5 style="color: pink;">Đây là thẻ h5</h5>
+        <h6 style="color: plum;">Đây là thẻ h6</h6>
+    </div>
+    <div id="question2">
+        <h1 class="question">Question 2: HTML Lists</h1>
+        <h2 style="color: crimson;">Danh sách lớp học</h2>
+        <ol style="color: darkorchid;">
+            <li>Nguyễn Ngọc Duy</li>
+            <li>Tống Quang Anh</li>
+            <li>Đinh Thu Loan</li>
+            <li>Hà Văn Tiến</li>
+            <li>Nguyễn Hải Đăng</li>
+            <li>Nguyễn Tiến Quang</li>
+            <li>Nguyễn Văn Chiến</li>
+        </ol>
+        <h2>A list in a list in a list</h2>
+        <ul>
+            <li>Coffee</li>
+            <li>Tea
+                <ul>
+                    <li>Black tea</li>
+                    <li>Green tea
+                        <ul>
+                            <li>China</li>
+                            <li>Africa</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Milk</li>
+        </ul>
+        <ol>
+            <li>Cơm trưa
+                <ul>
+                    <li>Cơm chiên hải sản</li>
+                    <li>Cơm sườn non nấu cam</li>
+                    <li>Cơm canh chua cá lóc</li>
+                </ul>
+            </li>
+            <li>Tráng miệng trái cây
+                <ul>
+                    <li>Nho tươi</li>
+                    <li>Chuối</li>
+                    <li>Mận</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+    <div id="question3">
+        <h1 class="question">Question 3: HTML Text Formatting</h1>
+        <b>This text is bold</b><br>
+        <i>This text is italic</i>
+        <p>This is <sub>subscript</sub> and <sup>superscript</sup></p>
+        <p>This text is nomal.</p>
+        <em>This text is emphasized.</em>
+        <p>HTML <small>Small</small> Formatting</p>
+        <p>HTML <mark>Marked</mark> Formatting</p>
+        <p>The del element rtepresents deleted (removed) text <br>
+            My favorite color is <del>blue</del> red
+        </p>
+        <p>The ins element rtepresents inserted (added) text <br>
+            My favorite <ins>color</ins> is red
+        </p>
+    </div>
+    <div id="question4">
+        <h1 class="question">Question 4: form</h1>
+        <form action="action_page.html">
+            <h1>Register</h1>
+            <p><i>Please <b>fill in this form</b> to create an account</i></p>
+            <label for="fullName" class="required">Full name</label><br>
+            <input type="text" id="fullName" name="fullName" required>
+            <br><br>
+            <label for="userName" class="required">Username</label><br>
+            <input type="text" id="userName" name="userName" required>
+            <br><br>
+            <label for="password" class="required">Password</label><br>
+            <input type="password" id="password" name="password" required>
+            <br><br>
+            <label for="email" class="required">Email</label><br>
+            <input type="email" id="email" name="email" required>
+            <br><br>
+            <label for="telephone" class="required">Telephone number</label><br>
+            <input type="text" id="telephone" name="telephone" required>
+            <br><br>
+            <label for="object">Input Object:</label><br>
+            <input type="radio" name="object" id="student" value="student"> Student
+            <input type="radio" name="object" id="teacher" value="teacher"> Teacher
+            <br><br>
+            <label for="favorite">Favorite:</label><br>
+            <input type="checkbox" name="favorite" id="badminton" value="badminton"> Badminton
+            <input type="checkbox" name="favorite" id="volleyball" value="volleyball"> Volleyball
+            <input type="checkbox" name="favorite" id="football" value="football"> Football
+            <br><br>
+            <label for="address" class="required">Address</label><br>
+            <select name="addresss" id="addresss">
+                <option value="bacgiang">Bắc Giang</option>
+                <option value="hanoi">Hà Nội</option>
+                <option value="thaibinh">Thái Bình</option>
+                <option value="nghean">Nghệ An</option>
+                <option value="hue">Huế</option>
+            </select>
+            <br><br>
+            <label for="picture" class="required">Your picture</label><br>
+            <input type="file" name="picture" id="picture" accept="image/*">
+            <br><br>
+            <input type="submit" value="Đăng kí">
+        </form>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br>
+</body>
+
+</html>
