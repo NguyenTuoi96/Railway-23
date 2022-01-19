@@ -1,0 +1,39 @@
+.section1{
+    width: 300px;
+}
+
+img{
+    width: 300px;
+}
+
+.read-more{
+    background-color: rgb(41, 111, 240);
+    border: none;
+    height: 25px;
+    border-radius: 4px;
+    color: white;
+    float: right;
+}
+
+.row1:after {
+    content: "";
+    display: table;
+    clear: both;
+    margin-bottom: 30px;
+}
+
+.row2:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.section2{
+    width: 300px;
+    float: left;
+    margin-left: 100px;
+}
+
+.section2_1{
+    margin-left: 0px;
+}
