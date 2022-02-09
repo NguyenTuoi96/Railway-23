@@ -21,7 +21,7 @@
                 <i class="fas fa-bars" id="iconNav"></i>
             </div>
 
-            <div class="head right user">User</div>
+            <div class="head right user">Nguyen A</div>
             <div class="head right avt">
                 <img class="imgAvt" src="image/avt.jpg" alt="avt">
             </div>
@@ -42,7 +42,7 @@
                 </nav>
             </div>
             <div class="column main">
-                <h3>Manage Group <i class="fas fa-users menuIcon"></i></h3>
+                <h3>Manage Group <i class="fas fa-users menuIcon" title="Show list group" onclick="getList()"></i></h3>
                 <div class="contentTable" id="list">
                     <div class="subHeader">
                         <h4 id="contentName"></h4>
@@ -50,11 +50,11 @@
                     <div class="subMenu">
                         <div class="left">
                             <input type="text" placeholder="Nhập id" name="search" id="search">
-                            <button id="btnSearch" type='button'><i class="fa fa-search" onclick="search()"></i></button>
+                            <button id="btnSearch" type='button' onclick="searchById()" title="Search group"><i class="fa fa-search"></i></button>
                         </div>
-                        <div class="right plus"><i class="fas fa-plus" onclick="showCreateModal()"></i></div>
-                        <div class="right reset"><i class="fas fa-sync-alt" onclick="getList()"></i></div>
-                        <div class="right del"><i class="fas fa-trash-alt" onclick="showDelConfirm()"></i></div>
+                        <div class="right plus"><i class="fas fa-plus" title="Add group" onclick="showCreateGroupModal()"></i></div>
+                        <div class="right reset"><i class="fas fa-sync-alt" title="Reset list" onclick="getList()"></i></div>
+                        <div class="right del"><i class="fas fa-trash-alt" title="Delete group" onclick="showDelConfirm()"></i></div>
                     </div>
                     <div id="listTable">
                     </div>
@@ -76,45 +76,24 @@
                     </div>
                 </div>
 
-                <!-- The Modal Create-->
-                <div id="createGroupModal" class="modal">
+                <!-- The Modal -->
+                <div id="groupEditModal" class="modal">
                     <!-- Modal content -->
                     <div class="modal-content">
-                        <span id="createGroupModalClose" class="close" onclick="closeCreateGroupModal()">&times;</span>
+                        <span id="groupModalClose" class="close" onclick="closeGroupModal()">&times;</span>
                         <br>
                         <br>
-                        <h3 class="modalName">Create group</h3>
+                        <h3 id="modalName"></h3>
                         <br>
-                        Group Name: <input type="text" id="inputGroupName" class="groupName">
+                        Group Name: <input type="text" id="inputGroupName" class="inputGroupName">
                         <br><br>
-                        <label id="errInfoCreate" class="errInfo" for="inputGroupName"></label>
-                        <div class="btnArea">
-                            <button id="btnSave" type='button' onclick="checkCreateGroup()">Save</button>
-                            <button id="btnCancel" type='button' onclick="closeCreateGroupModal()">Cancel</button>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- The Modal Edit-->
-                <div id="editGroupModal" class="modal">
-                    <!-- Modal content -->
-                    <div class="modal-content">
-                        <span id="editGroupModalClose" class="close" onclick="closeEditGroupModal()">&times;</span>
-                        <br>
-                        <br>
-                        <h3 class="modalName">Edit group</h3>
-                        <br>
-                        Group Name: <input type="text" id="inputEditGroupName" class="groupName">
-                        <br><br>
-                        <label id="errInfoEdit" class="errInfo" for="inputEditGroupName"></label>
+                        <label id="errInfo" class="errInfo" for="inputGroupName"></label>
                         <span style="display:none" id="groupId"></span>
                         <div class="btnArea">
-                            <button id="btnSaveEdit" type='button' onclick="checkEditGroup()">Save</button>
-                            <button id="btnCancelEdit" type='button' onclick="closeEditGroupModal()">Cancel</button>
+                            <button id="btnSave" type='button'>Save</button>
+                            <button id="btnCancel" type='button' onclick="closeGroupModal()">Cancel</button>
                         </div>
                     </div>
-
                 </div>
 
                 <!-- The Modal Delete-->
@@ -132,6 +111,21 @@
                     </div>
 
                 </div>
+
+                <!-- Infomation -->
+                <div id="infoMsg" class="infoMsgModal">
+                    <!-- Modal content -->
+                    <div class="modal-content info-modal-content">
+                        <h3 id="infoName"></h3>
+                        <br>
+                        <p id="infoContent"></p>
+                        <br><br>
+                        <div class="btnArea">
+                            <button id="btnOk" type='button' onclick="closeInfoMsg()">OK</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
