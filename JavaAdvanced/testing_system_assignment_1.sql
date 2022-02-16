@@ -4,8 +4,8 @@ CREATE DATABASE testing_system;
 USE testing_system;
 
 -- create table Ex1: group_ex1
-DROP TABLE IF EXISTS 	`group_ex1`;
-CREATE TABLE IF NOT EXISTS `group_ex1` (
+DROP TABLE IF EXISTS 	group_ex1;
+CREATE TABLE IF NOT EXISTS group_ex1 (
 	id 				SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	`name` 			NVARCHAR(50) NOT NULL UNIQUE KEY,
     create_date 	DATE
@@ -41,13 +41,13 @@ VALUES
 
 -- create table 2: posittion
 DROP TABLE IF EXISTS position;
-CREATE TABLE `position` (
+CREATE TABLE position (
 	position_id				TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     position_name			ENUM('Dev','Test','ScrumMaster','PM') NOT NULL UNIQUE KEY -- mapping trên Java là String
 );
 
 -- Add data position
-INSERT INTO position	(`position_name`	) 
+INSERT INTO position	(position_name	) 
 VALUES 					('Dev'			),
 						('Test'			),
 						('ScrumMaster'	);
@@ -117,8 +117,7 @@ CREATE TABLE type_question (
 
 -- Add data TypeQuestion
 INSERT INTO type_question	(type_name	) 
-VALUES 						('0'), 
-							('1'); 
+VALUES 						('0'); 
 
 -- create table 7: category_question
 DROP TABLE IF EXISTS category_question;
@@ -187,9 +186,9 @@ DROP TABLE IF EXISTS exam;
 CREATE TABLE exam (
     exam_id					TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     `code1`					CHAR(10) NOT NULL,	-- L-1: if duration >= 180p, M-1: if duration >= 90p, S-1: otherwise -- Cannot update this field
-    `code2`					CHAR(10), -- NOT NULL,	-- L-1: if duration >= 180p, M-1: if duration >= 90p, S-1: otherwise -- Cannot update this field
+    `code2`					CHAR(10), -- NOT NUL-- L-1: if duration >= 180p, M-1: if duration >= 90p, S-1: otherwise -- Cannot update this field
     title					NVARCHAR(50) NOT NULL,
-    duration				TINYINT UNSIGNED NOT NULL DEFAULT 45,
+    duration				TINYINT UNSIGNED DEFAULT 45 NOT NULL,
     create_date				DATETIME DEFAULT NOW() -- Cannot update this field
 );	
 
