@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Testing System 5</title>
+</head>
+
+<body>
+    <form name="departmentManager">
+        <div class="header">
+            <div class="head left logo">
+                <img class="imgLogo" src="image/logo.jpg" alt="VTILogo">
+            </div>
+            <div class="head left nav">
+                <i class="fas fa-bars" id="iconNav"></i>
+            </div>
+
+            <div class="head right user">Nguyen A</div>
+            <div class="head right avt">
+                <img class="imgAvt" src="image/avt.jpg" alt="avt">
+            </div>
+            <div class="head right bell"><i class="fas fa-bell"></i></div>
+        </div>
+
+        <div class="body">
+            <div class="column menu">
+                <nav>
+                    <ul>
+                        <li class="menuItem"><i class="fas fa-home menuIcon" id="menuHome"></i></li>
+                        <li class="menuItem"><i class="fas fa-user menuIcon" id="menuUser"></i></li>
+                        <li class="menuItem"><i class="fas fa-users menuIcon" id="menuUsers"></i></li>
+                        <li class="menuItem"><i class="fas fa-bars menuIcon" id="menuNav"></i></li>
+                        <li class="menuItem"><i class="fas fa-file-alt menuIcon" id="menuFile"></i></li>
+                        <li class="menuItem"><i class="fas fa-question menuIcon" id="menuQuestion"></i></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="column main">
+                <h3>Manage Department <i class="fas fa-users menuIcon" title="Show list department" onclick="getList()"></i></h3>
+                <div class="contentTable" id="list">
+                    <div class="subHeader">
+                        <h4 id="contentName"></h4>
+                    </div>
+                    <div class="subMenu">
+                        <div class="left">
+                            <input type="text" placeholder="Nhập id" name="search" id="search">
+                            <button id="btnSearch" type='button' onclick="searchById()" title="Search department"><i class="fa fa-search"></i></button>
+                        </div>
+                        <div class="right plus"><i class="fas fa-plus" title="Add department" onclick="showCreateDepartmentModal()"></i></div>
+                        <div class="right reset"><i class="fas fa-sync-alt" title="Reset list" onclick="getList()"></i></div>
+                        <div class="right del"><i class="fas fa-trash-alt" title="Delete department" onclick="showDelConfirm()"></i></div>
+                    </div>
+                    <div id="listTable">
+                    </div>
+                </div>
+                <div class="contentTable" id="detail">
+                    <div class="subHeader">
+                        <h4 id="detailName"></h4>
+                    </div>
+                    <div id="departmentDetail">
+                        <br>
+                        <div id="departmentDetailHeader">
+                        </div>
+                        <br>
+                        Creator: <label id="creatorName"></label>
+                        <br>
+                        Create Date: <label id="createDate"></label>
+                        <br>
+                        Member: <label id="member"></label>
+                    </div>
+                </div>
+
+                <!-- The Modal -->
+                <div id="departmentEditModal" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span id="departmentModalClose" class="close" onclick="closeDepartmentModal()">&times;</span>
+                        <br>
+                        <br>
+                        <h3 id="modalName"></h3>
+                        <br>
+                        Department Name: <input type="text" id="inputDepartmentName" class="inputDepartmentName">
+                        <br><br>
+                        <label id="errInfo" class="errInfo" for="inputDepartmentName"></label>
+                        <span style="display:none" id="departmentId"></span>
+                        <div class="btnArea">
+                            <button id="btnSave" type='button'>Save</button>
+                            <button id="btnCancel" type='button' onclick="closeDepartmentModal()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- The Modal Delete-->
+                <div id="deleteDepartmentModal" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <h3 class="modalName">Delete department</h3>
+                        <br>
+                        <p class="modalName">Do you want to delete department?</p>
+                        <br>
+                        <div class="btnAreaDel">
+                            <button id="btnYesDel" type='button' onclick="deleteDepartment()">Yes</button>
+                            <button id="btnNoDel" type='button' onclick="closeDeleteDepartmentModal()">No</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Infomation -->
+                <div id="infoMsg" class="infoMsgModal">
+                    <!-- Modal content -->
+                    <div class="modal-content info-modal-content">
+                        <h3 id="infoName"></h3>
+                        <br>
+                        <p id="infoContent"></p>
+                        <br><br>
+                        <div class="btnArea">
+                            <button id="btnOk" type='button' onclick="closeInfoMsg()">OK</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Version: 0.0.0</p>
+        </div>
+
+    </form>
+    <script src="javascript/jQuery.min.js"></script>
+    <script src="javascript/custom.js"></script>
+</body>
+
+</html>
