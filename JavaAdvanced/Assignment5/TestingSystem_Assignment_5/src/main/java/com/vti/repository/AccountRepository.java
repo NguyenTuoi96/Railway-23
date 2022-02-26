@@ -6,20 +6,20 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.vti.entity.Department;
+import com.vti.entity.Account;
 import com.vti.utils.HibernateUtils;
 
 @Repository
-public class DepartmentRepository implements IDepartmentRepository {
+public class AccountRepository implements IAccountRepository {
 
 	private HibernateUtils hibernateUtils;
 
-	public DepartmentRepository() {
+	public AccountRepository() {
 		hibernateUtils = HibernateUtils.getInstance();
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Department> getAllDepartments() {
+	public List<Account> getAllAccounts() {
 
 		Session session = null;
 
@@ -29,7 +29,7 @@ public class DepartmentRepository implements IDepartmentRepository {
 			session = hibernateUtils.openSession();
 
 			// create hql query
-			Query<Department> query = session.createQuery("FROM Department ORDER BY id");
+			Query<Account> query = session.createQuery("FROM Account ORDER BY accountId");
 
 			return query.list();
 
@@ -40,7 +40,7 @@ public class DepartmentRepository implements IDepartmentRepository {
 		}
 	}
 
-	public Department getDepartmentByID(int id) {
+	public Account getAccountByID(int id) {
 
 		Session session = null;
 
@@ -49,10 +49,10 @@ public class DepartmentRepository implements IDepartmentRepository {
 			// get session
 			session = hibernateUtils.openSession();
 
-			// get department by id
-			Department department = session.get(Department.class, id);
+			// get Account by id
+			Account Account = session.get(Account.class, id);
 
-			return department;
+			return Account;
 
 		} finally {
 			if (session != null) {
@@ -62,7 +62,7 @@ public class DepartmentRepository implements IDepartmentRepository {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Department getDepartmentByName(String name) {
+	public Account getAccountByName(String name) {
 
 		Session session = null;
 
@@ -72,15 +72,15 @@ public class DepartmentRepository implements IDepartmentRepository {
 			session = hibernateUtils.openSession();
 
 			// create hql query
-			Query<Department> query = session.createQuery("FROM Department WHERE name = :nameParameter");
+			Query<Account> query = session.createQuery("FROM Account WHERE name = :nameParameter");
 
 			// set parameter
 			query.setParameter("nameParameter", name);
 
 			// get result
-			Department department = query.uniqueResult();
+			Account Account = query.uniqueResult();
 
-			return department;
+			return Account;
 
 		} finally {
 			if (session != null) {
@@ -89,7 +89,7 @@ public class DepartmentRepository implements IDepartmentRepository {
 		}
 	}
 
-	public void createDepartment(Department department) {
+	public void createAccount(Account Account) {
 
 		Session session = null;
 
@@ -100,7 +100,7 @@ public class DepartmentRepository implements IDepartmentRepository {
 			session.beginTransaction();
 
 			// create
-			session.save(department);
+			session.save(Account);
 
 			session.getTransaction().commit();
 		} finally {
@@ -110,32 +110,7 @@ public class DepartmentRepository implements IDepartmentRepository {
 		}
 	}
 
-	public void updateDepartment(int id, String newName) {
-
-		Session session = null;
-
-		try {
-
-			// get session
-			session = hibernateUtils.openSession();
-			session.beginTransaction();
-
-			// get department
-			Department department = (Department) session.load(Department.class, id);
-
-			// update
-			department.setName(newName);
-
-			session.getTransaction().commit();
-
-		} finally {
-			if (session != null) {
-				session.close();
-			}
-		}
-	}
-
-	public void updateDepartment(Department department) {
+	public void updateAccount(Account Account) {
 
 		Session session = null;
 
@@ -146,7 +121,7 @@ public class DepartmentRepository implements IDepartmentRepository {
 			session.beginTransaction();
 
 			// update
-			session.update(department);
+			session.update(Account);
 
 			session.getTransaction().commit();
 		} finally {
@@ -156,7 +131,7 @@ public class DepartmentRepository implements IDepartmentRepository {
 		}
 	}
 
-	public void deleteDepartment(int id) {
+	public void deleteAccount(int id) {
 
 		Session session = null;
 
@@ -166,11 +141,11 @@ public class DepartmentRepository implements IDepartmentRepository {
 			session = hibernateUtils.openSession();
 			session.beginTransaction();
 
-			// get department
-			Department department = (Department) session.load(Department.class, id);
+			// get Account
+			Account Account = (Account) session.load(Account.class, id);
 
 			// delete
-			session.delete(department);
+			session.delete(Account);
 
 			session.getTransaction().commit();
 
@@ -181,26 +156,58 @@ public class DepartmentRepository implements IDepartmentRepository {
 		}
 	}
 
-	public boolean isDepartmentExistsByID(int id) {
+	public boolean isAccountExistsByID(int id) {
 
-		// get department
-		Department department = getDepartmentByID(id);
+		// get Account
+		Account Account = getAccountByID(id);
 
 		// return result
-		if (department == null) {
+		if (Account == null) {
 			return false;
 		}
 
 		return true;
 	}
 
-	public boolean isDepartmentExistsByName(String name) {
-		Department department = getDepartmentByName(name);
+	public boolean isAccountExistsByName(String name) {
+		Account Account = getAccountByName(name);
 
-		if (department == null) {
+		if (Account == null) {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public void updateAccount(int id, String email, String userName, String fullName, String password, String confirmPassword,
+			String phone) {
+		Session session = null;
+
+		try {
+
+			// get session
+			session = hibernateUtils.openSession();
+			session.beginTransaction();
+
+			// get Account
+			Account Account = (Account) session.load(Account.class, id);
+
+			// update
+			Account.setEmail(email);
+			Account.setFullName(fullName);
+			Account.setPassword(password);
+			Account.setConfirmPassword(confirmPassword);
+			Account.setPhone(phone);
+
+
+			session.getTransaction().commit();
+
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+
 	}
 
 }

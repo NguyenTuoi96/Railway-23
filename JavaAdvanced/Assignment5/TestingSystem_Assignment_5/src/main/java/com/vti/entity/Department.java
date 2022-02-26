@@ -1,13 +1,17 @@
 package com.vti.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "department")
@@ -22,12 +26,12 @@ public class Department implements Serializable {
 
 	@Column(name = "department_name", length = 30, nullable = false, unique = true)
 	private String name;
+	
+	@OneToMany(mappedBy = "department")
+	@JsonIgnoreProperties("department")
+	private List<Account> accounts;
 
 	public Department() {
-	}
-
-	public Department(String name) {
-		this.name = name;
 	}
 
 	public int getId() {
@@ -46,9 +50,17 @@ public class Department implements Serializable {
 		this.name = name;
 	}
 
-	@Override
-	public String toString() {
-		return "Department { " + "ID = " + id + ", Name = '" + name + '\'' + '}';
+	public List<Account> getAccounts() {
+		return accounts;
 	}
 
+	public void setAccounts(List<Account> accounts) {
+		this.accounts = accounts;
+	}
+
+	@Override
+	public String toString() {
+		return "Department [id=" + id + ", name=" + name + "]";
+	}
+	
 }

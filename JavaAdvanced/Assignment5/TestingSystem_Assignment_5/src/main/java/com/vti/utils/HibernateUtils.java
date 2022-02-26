@@ -6,6 +6,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import com.vti.entity.Account;
 import com.vti.entity.Department;
 
 public class HibernateUtils {
@@ -32,6 +33,7 @@ public class HibernateUtils {
 		configuration.configure("hibernate.cfg.xml");
 
 		configuration.addAnnotatedClass(Department.class);
+		configuration.addAnnotatedClass(Account.class);
 	}
 
 	private SessionFactory buildSessionFactory() {
